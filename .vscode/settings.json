@@ -1,0 +1,6 @@
+{
+  "eslint.debug": true,
+  "eslint.format.enable": false,
+  "prettier.singleQuote": true,
+  "editor.formatOnSave": true
+}
