@@ -3,7 +3,12 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['plugin:react/recommended', 'standard-with-typescript', 'prettier'],
+  extends: [
+    'plugin:react/recommended',
+    'standard-with-typescript',
+    'prettier',
+    'google',
+  ],
   overrides: [],
   parserOptions: {
     ecmaVersion: 'latest',
@@ -11,7 +16,6 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
-    semi: 'error',
     preferConst: 'error',
   },
 };
