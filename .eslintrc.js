@@ -14,7 +14,7 @@ const OFF = 0;
 const ERROR = 2;
 
 module.exports = {
-  extends: ['fbjs', 'plugin:react-hooks/recommended', 'prettier'],
+  extends: ['plugin:react-hooks/recommended', 'prettier'],
 
   globals: {
     JSX: true,
