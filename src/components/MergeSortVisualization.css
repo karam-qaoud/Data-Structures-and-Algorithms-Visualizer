@@ -1,0 +1,12 @@
+.bar {
+    display: inline-block;
+    margin: 0 1px;
+    width: 10px;
+    background-color: green;
+}
+
+.barsList {
+    position: absolute;
+    top: 150px;
+    left: 50px;
+}

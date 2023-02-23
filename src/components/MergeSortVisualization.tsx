@@ -1,41 +1,124 @@
-import React from 'react';
+import React, { useState } from 'react';
+import './MergeSortVisualization.css';
 
-function mergeSort(arr: number[]): number[] {
-  if (arr.length <= 1) return arr;
+let animationSpeed = 1;
 
-  let mid = Math.floor(arr.length / 2);
-
-  let sortedLeft = mergeSort(arr.slice(0, mid));
-  let sortedRight = MergeSort(arr.slice(mid));
-
-  let merged = mergeTwoSortedArrays(sortedLeft, sortedRight);
-
-  return merged;
+// ============================= Helper Functions =============================
+export function visualizeMergeSort(array) {
+  const sortingSteps = [];
+  if (array.length <= 1) return array;
+  const arrCopy = array.slice();
+  mergeSort(array, 0, array.length - 1, arrCopy, sortingSteps);
+  return sortingSteps;
 }
 
-function mergeTwoSortedArrays(arr1: number[], arr2: number[]): number[] {
-  const merged: number[] = [];
-  let i = 0,
-    j = 0;
+function mergeSort(arr, left, right, arrCopy, sortingSteps) {
+  if (left === right) return;
+  const mid = Math.floor((left + right) / 2);
+  mergeSort(arrCopy, left, mid, arr, sortingSteps);
+  mergeSort(arrCopy, mid + 1, right, arr, sortingSteps);
+  mergeTwoSortedIntervals(arr, left, mid, right, arrCopy, sortingSteps);
+}
 
-  while (i < arr1.length || j < arr2.length) {
-    if (j >= arr2.length || arr1[i] < arr2[j]) {
-      merged.push(arr1[i]);
-      i++;
+function mergeTwoSortedIntervals(arr, left, mid, right, arrCopy, sortingSteps) {
+  let k = left;
+  let i = left;
+  let j = mid + 1;
+  while (i <= mid && j <= right) {
+    sortingSteps.push([i, j]);
+    sortingSteps.push([i, j]);
+    if (arrCopy[i] <= arrCopy[j]) {
+      sortingSteps.push([k, arrCopy[i]]);
+      arr[k++] = arrCopy[i++];
     } else {
-      merged.push(arr2[j]);
-      j++;
+      sortingSteps.push([k, arrCopy[j]]);
+      arr[k++] = arrCopy[j++];
     }
   }
-
-  return merged;
+  while (i <= mid) {
+    sortingSteps.push([i, i]);
+    sortingSteps.push([i, i]);
+    sortingSteps.push([k, arrCopy[i]]);
+    arr[k++] = arrCopy[i++];
+  }
+  while (j <= right) {
+    sortingSteps.push([j, j]);
+    sortingSteps.push([j, j]);
+    sortingSteps.push([k, arrCopy[j]]);
+    arr[k++] = arrCopy[j++];
+  }
 }
 
+function generateRandomArray() {
+  const arr: number[] = [];
+  for (let i = 0; i < 120; i++) {
+    arr.push(Math.round(Math.random() * 100));
+  }
+  return arr;
+}
+
+function setAnimationSpeed(event) {
+  animationSpeed = event.target.value;
+}
+
+// ============================= Merge Sort Visualization Component =============================
 function MergeSortVisualization(): JSX.Element {
-  const arrToSort: number[] = [4, 5, 2, 6, 2, 6, 3, 6];
+  const [isAnimationDone, setIsAnimationDone] = useState(true);
+  const [arrToSort, setArrToSort] = useState(generateRandomArray());
+
+  function runSortingVisualization() {
+    setIsAnimationDone(false);
+    const sortingSteps = visualizeMergeSort(arrToSort);
+    for (let i = 0; i < sortingSteps.length; i++) {
+      const bars = document.getElementsByClassName('bar');
+      const changedColor = i % 3 !== 2;
+      if (changedColor) {
+        const [firstBar, secondBar] = sortingSteps[i];
+        const firstBarStyle = bars[firstBar].style;
+        const secondBarStyle = bars[secondBar].style;
+        const color = i % 3 === 0 ? 'blue' : 'green';
+        setTimeout(() => {
+          firstBarStyle.backgroundColor = color;
+          secondBarStyle.backgroundColor = color;
+        }, i * animationSpeed);
+      } else {
+        setTimeout(() => {
+          const [firstBar, newHeight] = sortingSteps[i];
+          const firstBarStyle = bars[firstBar].style;
+          firstBarStyle.height = `${newHeight * 5}px`;
+        }, i * animationSpeed);
+      }
+    }
+    setIsAnimationDone(true);
+  }
+
   return (
     <div>
       <h1>Merge Sort Algorithm</h1>
+      <button onClick={runSortingVisualization} disabled={!isAnimationDone}>
+        Sort
+      </button>
+      <button
+        onClick={() => {
+          setArrToSort(generateRandomArray());
+        }}
+      >
+        Generate new random array
+      </button>
+      <label htmlFor="speedSlider">Speed</label>
+      <input
+        type="range"
+        onChange={setAnimationSpeed}
+        min={1}
+        max={1000}
+        step={1}
+        className="custom-slider"
+      ></input>
+      <div className="barsList">
+        {arrToSort.map((num, i) => (
+          <div className="bar" style={{ height: `${num * 5}px` }} key={i}></div>
+        ))}
+      </div>
     </div>
   );
 }
