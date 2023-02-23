@@ -64,6 +64,8 @@ function setAnimationSpeed(event) {
 // ============================= Merge Sort Visualization Component =============================
 function MergeSortVisualization(): JSX.Element {
   const [isAnimationDone, setIsAnimationDone] = useState(true);
+  const [hasANewArrayBeenGenerated, setHasANewArrayBeenGenerated] =
+    useState(true);
   const [arrToSort, setArrToSort] = useState(generateRandomArray());
 
   async function runSortingVisualization() {
@@ -97,6 +99,7 @@ function MergeSortVisualization(): JSX.Element {
         );
       }
     }
+    setHasANewArrayBeenGenerated(false);
     setIsAnimationDone(true);
   }
 
@@ -104,12 +107,20 @@ function MergeSortVisualization(): JSX.Element {
     <div>
       <h1>Merge Sort Algorithm</h1>
       <hr />
-      <button onClick={runSortingVisualization} disabled={!isAnimationDone}>
+      <button
+        onClick={() => {
+          runSortingVisualization();
+          setHasANewArrayBeenGenerated(false);
+        }}
+        disabled={!isAnimationDone || !hasANewArrayBeenGenerated}
+      >
         Sort
       </button>
+
       <button
         onClick={() => {
           setArrToSort(generateRandomArray());
+          setHasANewArrayBeenGenerated(true);
         }}
         disabled={!isAnimationDone}
       >
