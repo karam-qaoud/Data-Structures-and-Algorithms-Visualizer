@@ -127,14 +127,14 @@ function MergeSortVisualization(): JSX.Element {
         Generate new random array
       </button>
       <hr />
-      <label htmlFor="speedSlider">Speed</label>
+      <label htmlFor="speedSlider">Slow Animation Speed </label>
       <input
         type="range"
         onChange={setAnimationSpeed}
-        min={1}
+        min={0}
         max={1000}
         step={1}
-        className="custom-slider"
+        className="speed-slider"
       ></input>
       <hr />
       <div className="barsList">
