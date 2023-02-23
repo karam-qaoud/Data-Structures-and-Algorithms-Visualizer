@@ -66,9 +66,9 @@ function MergeSortVisualization(): JSX.Element {
   const [isAnimationDone, setIsAnimationDone] = useState(true);
   const [arrToSort, setArrToSort] = useState(generateRandomArray());
 
-  function runSortingVisualization() {
+  async function runSortingVisualization() {
     setIsAnimationDone(false);
-    const sortingSteps = visualizeMergeSort(arrToSort);
+    const sortingSteps = visualizeMergeSort([...arrToSort]);
     for (let i = 0; i < sortingSteps.length; i++) {
       const bars = document.getElementsByClassName('bar');
       const changedColor = i % 3 !== 2;
@@ -77,16 +77,24 @@ function MergeSortVisualization(): JSX.Element {
         const firstBarStyle = bars[firstBar].style;
         const secondBarStyle = bars[secondBar].style;
         const color = i % 3 === 0 ? 'blue' : 'green';
-        setTimeout(() => {
-          firstBarStyle.backgroundColor = color;
-          secondBarStyle.backgroundColor = color;
-        }, i * animationSpeed);
+        // eslint-disable-next-line no-loop-func
+        await new Promise((resolve) =>
+          setTimeout(() => {
+            firstBarStyle.backgroundColor = color;
+            secondBarStyle.backgroundColor = color;
+            resolve('Done');
+          }, animationSpeed)
+        );
       } else {
-        setTimeout(() => {
-          const [firstBar, newHeight] = sortingSteps[i];
-          const firstBarStyle = bars[firstBar].style;
-          firstBarStyle.height = `${newHeight * 5}px`;
-        }, i * animationSpeed);
+        // eslint-disable-next-line no-loop-func
+        await new Promise((resolve) =>
+          setTimeout(() => {
+            const [firstBar, newHeight] = sortingSteps[i];
+            const firstBarStyle = bars[firstBar].style;
+            firstBarStyle.height = `${newHeight * 5}px`;
+            resolve('Done');
+          }, animationSpeed)
+        );
       }
     }
     setIsAnimationDone(true);
@@ -95,6 +103,7 @@ function MergeSortVisualization(): JSX.Element {
   return (
     <div>
       <h1>Merge Sort Algorithm</h1>
+      <hr />
       <button onClick={runSortingVisualization} disabled={!isAnimationDone}>
         Sort
       </button>
@@ -102,9 +111,11 @@ function MergeSortVisualization(): JSX.Element {
         onClick={() => {
           setArrToSort(generateRandomArray());
         }}
+        disabled={!isAnimationDone}
       >
         Generate new random array
       </button>
+      <hr />
       <label htmlFor="speedSlider">Speed</label>
       <input
         type="range"
@@ -114,6 +125,7 @@ function MergeSortVisualization(): JSX.Element {
         step={1}
         className="custom-slider"
       ></input>
+      <hr />
       <div className="barsList">
         {arrToSort.map((num, i) => (
           <div className="bar" style={{ height: `${num * 5}px` }} key={i}></div>
