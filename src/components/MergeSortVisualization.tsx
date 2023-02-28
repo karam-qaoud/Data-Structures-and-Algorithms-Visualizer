@@ -51,7 +51,7 @@ function mergeTwoSortedIntervals(arr, left, mid, right, arrCopy, sortingSteps) {
 
 function generateRandomArray() {
   const arr: number[] = [];
-  for (let i = 0; i < 120; i++) {
+  for (let i = 0; i < 200; i++) {
     arr.push(Math.round(Math.random() * 100));
   }
   return arr;
@@ -104,41 +104,44 @@ function MergeSortVisualization(): JSX.Element {
   }
 
   return (
-    <div>
-      <button
-        onClick={() => {
-          runSortingVisualization();
-          setHasANewArrayBeenGenerated(false);
-        }}
-        disabled={!isAnimationDone || !hasANewArrayBeenGenerated}
-      >
-        Sort
-      </button>
-
-      <button
-        onClick={() => {
-          setArrToSort(generateRandomArray());
-          setHasANewArrayBeenGenerated(true);
-        }}
-        disabled={!isAnimationDone}
-      >
-        Generate new random array
-      </button>
-      <hr />
-      <label htmlFor="speedSlider"> Speed </label>
-      <input
-        type="range"
-        onChange={setAnimationSpeed}
-        min={0}
-        max={1000}
-        step={1}
-        className="speed-slider"
-      ></input>
-      <hr />
+    <div className="controls-animation">
       <div className="barsList">
         {arrToSort.map((num, i) => (
           <div className="bar" style={{ height: `${num * 5}px` }} key={i}></div>
         ))}
+      </div>
+      <div className="controls">
+        <div className="speed-control">
+          <h2> Speed  </h2>
+          <input
+            type="range"
+            onChange={setAnimationSpeed}
+            min={0}
+            max={1000}
+            step={1}
+            className="speed-slider"
+          ></input>
+        </div>
+        <button
+          className="btn"
+          onClick={() => {
+            setArrToSort(generateRandomArray());
+            setHasANewArrayBeenGenerated(true);
+          }}
+          disabled={!isAnimationDone}
+        >
+          Generate new random array
+        </button>
+        <button
+          className="btn"
+          onClick={() => {
+            runSortingVisualization();
+            setHasANewArrayBeenGenerated(false);
+          }}
+          disabled={!isAnimationDone || !hasANewArrayBeenGenerated}
+        >
+          Sort
+        </button>
       </div>
     </div>
   );
