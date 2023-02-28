@@ -1,5 +1,5 @@
 import './App.css';
-import MergeSort from './components/MergeSortVisualization.tsx';
+import MergeSort from './components/MergeSort/MergeSortVisualization';
 import { useState } from 'react';
 function App() {
   let [selection, setSelection] = useState('mergeSort');
