@@ -105,8 +105,6 @@ function MergeSortVisualization(): JSX.Element {
 
   return (
     <div>
-      <h1>Merge Sort Algorithm</h1>
-      <hr />
       <button
         onClick={() => {
           runSortingVisualization();
