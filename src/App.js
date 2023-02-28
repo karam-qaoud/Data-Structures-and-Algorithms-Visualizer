@@ -1,12 +1,15 @@
 import './App.css';
 import MergeSort from './components/MergeSortVisualization.tsx';
+import { useState } from 'react';
 function App() {
-  return (
-    <div className="App">
-      {/* TODO: change which component is rendered based on the selected algorithm from the top options bar */}
-      <MergeSort />
-    </div>
-  );
+  let [selection, setSelection] = useState('');
+
+  function renderSelection(selection) {
+    if (selection === '') {
+      return <MergeSort />;
+    }
+  }
+  return <div className="App">{renderSelection(selection)}</div>;
 }
 
 export default App;

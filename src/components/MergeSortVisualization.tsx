@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './MergeSortVisualization.css';
 
-let animationSpeed = 1;
+let animationSpeed = 1000;
 
 // ============================= Helper Functions =============================
 export function visualizeMergeSort(array) {
@@ -58,7 +58,7 @@ function generateRandomArray() {
 }
 
 function setAnimationSpeed(event) {
-  animationSpeed = event.target.value;
+  animationSpeed = 1000 - event.target.value;
 }
 
 // ============================= Merge Sort Visualization Component =============================
@@ -127,7 +127,7 @@ function MergeSortVisualization(): JSX.Element {
         Generate new random array
       </button>
       <hr />
-      <label htmlFor="speedSlider">Slow Animation Speed </label>
+      <label htmlFor="speedSlider"> Speed </label>
       <input
         type="range"
         onChange={setAnimationSpeed}
