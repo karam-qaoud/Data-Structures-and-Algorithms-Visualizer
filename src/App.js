@@ -1,12 +1,12 @@
 import './App.css';
-import MergeSort from './components/MergeSort/MergeSortVisualization';
+import MergeSortVisualization from './components/MergeSort/MergeSortVisualization.tsx';
 import { useState } from 'react';
 function App() {
   let [selection, setSelection] = useState('mergeSort');
 
   function renderSelection(selection) {
     if (selection === 'mergeSort') {
-      return <MergeSort />;
+      return <MergeSortVisualization />;
     } else {
       return <div> </div>;
     }
