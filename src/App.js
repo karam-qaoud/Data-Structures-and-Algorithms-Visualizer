@@ -3,14 +3,14 @@ import MergeSortVisualization from './components/MergeSort/MergeSortVisualizatio
 import InsertionSortVisualization from './components/InsertionSort/InsertionSortVisualization.tsx';
 import { useState } from 'react';
 function App() {
-  let [selection, setSelection] = useState('mergeSort');
+  let [selection, setSelection] = useState('Merge Sort');
 
   function renderSelection(selection) {
-    // if (selection === 'insertionSort') {
-    return <InsertionSortVisualization />;
-    // } else {
-    // return <MergeSortVisualization />;
-    // }
+    if (selection === 'Insertion Sort') {
+      return <InsertionSortVisualization />;
+    } else {
+      return <MergeSortVisualization />;
+    }
   }
   return (
     <div className="App">
@@ -19,12 +19,12 @@ function App() {
         <div class="dropdown">
           <div>
             <label> Select an algorithm: </label>
-            <button class="dropbtn">Merge Sort</button>
+            <button class="dropbtn">{selection}</button>
           </div>
           <div class="dropdown-content">
-            <a onClick={() => setSelection('mergeSort')}>Merge Sort</a>
-            <a onClick={() => setSelection('quickSort')}>Quick Sort</a>
-            <a onClick={() => setSelection('insertionSort')}>Insertion Sort</a>
+            <a onClick={() => setSelection('Merge Sort')}>Merge Sort</a>
+            <a onClick={() => setSelection('Quick Sort')}>Quick Sort</a>
+            <a onClick={() => setSelection('Insertion Sort')}>Insertion Sort</a>
           </div>
         </div>
       </div>
