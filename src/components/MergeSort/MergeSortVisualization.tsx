@@ -111,6 +111,7 @@ function MergeSortVisualization(): JSX.Element {
         ))}
       </div>
       <div className="controls">
+        <h1>Merge Sort</h1>
         <div className="speed-control">
           <h2> Speed  </h2>
           <input

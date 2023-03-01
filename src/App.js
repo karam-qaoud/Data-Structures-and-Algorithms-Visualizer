@@ -6,11 +6,11 @@ function App() {
   let [selection, setSelection] = useState('mergeSort');
 
   function renderSelection(selection) {
-    if (selection === 'insertionSort') {
-      return <InsertionSortVisualization />;
-    } else {
-      return <MergeSortVisualization />;
-    }
+    // if (selection === 'insertionSort') {
+    return <InsertionSortVisualization />;
+    // } else {
+    // return <MergeSortVisualization />;
+    // }
   }
   return (
     <div className="App">

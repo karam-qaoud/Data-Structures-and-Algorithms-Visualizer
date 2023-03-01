@@ -19,21 +19,20 @@ function insertionSort(arr, sortingSteps) {
       arr[j + 1] = arr[j];
       sortingSteps.push([i, j + 1]);
       sortingSteps.push([i, j + 1]);
-      sortingSteps.push([j, arr[j + 1]]);
+      sortingSteps.push([j + 1, arr[j + 1]]);
       j--;
     }
     arr[j + 1] = tmp;
-    sortingSteps.push([i, i]);
-    sortingSteps.push([i, i]);
-    sortingSteps.push([i, arr[i]]);
+    sortingSteps.push([i, j + 1]);
+    sortingSteps.push([i, j + 1]);
+    sortingSteps.push([j + 1, arr[j + 1]]);
   }
-  console.log('Sorted: ', arr);
   return arr;
 }
 
 function generateRandomArray() {
   const arr: number[] = [];
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 200; i++) {
     arr.push(Math.round(Math.random() * 100));
   }
   return arr;
@@ -93,6 +92,7 @@ function InsertionSortVisualization(): JSX.Element {
         ))}
       </div>
       <div className="controls">
+        <h1>Insertion Sort</h1>
         <div className="speed-control">
           <h2> Speed  </h2>
           <input
