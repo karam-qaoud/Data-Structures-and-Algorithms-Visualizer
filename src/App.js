@@ -1,14 +1,15 @@
 import './App.css';
 import MergeSortVisualization from './components/MergeSort/MergeSortVisualization.tsx';
+import InsertionSortVisualization from './components/InsertionSort/InsertionSortVisualization.tsx';
 import { useState } from 'react';
 function App() {
   let [selection, setSelection] = useState('mergeSort');
 
   function renderSelection(selection) {
-    if (selection === 'mergeSort') {
-      return <MergeSortVisualization />;
+    if (selection === 'insertionSort') {
+      return <InsertionSortVisualization />;
     } else {
-      return <div> </div>;
+      return <MergeSortVisualization />;
     }
   }
   return (
