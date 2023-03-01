@@ -2,6 +2,7 @@ import './App.css';
 import MergeSortVisualization from './components/MergeSort/MergeSortVisualization.tsx';
 import InsertionSortVisualization from './components/InsertionSort/InsertionSortVisualization.tsx';
 import BubbleSortVisualization from './components/BubbleSort/BubbleSortVisualization.tsx';
+import QuickSortVisualization from './components/QuickSort/QuickSortVisualization.tsx';
 import { useState } from 'react';
 function App() {
   let [selection, setSelection] = useState('Merge Sort');
@@ -9,6 +10,8 @@ function App() {
   function renderSelection(selection) {
     if (selection === 'Insertion Sort') {
       return <InsertionSortVisualization />;
+    } else if (selection === 'Quick Sort') {
+      return <QuickSortVisualization />;
     } else if (selection === 'Bubble Sort') {
       return <BubbleSortVisualization />;
     } else {
@@ -26,8 +29,9 @@ function App() {
           </div>
           <div class="dropdown-content">
             <a onClick={() => setSelection('Merge Sort')}>Merge Sort</a>
-            <a onClick={() => setSelection('Bubble Sort')}>Bubble Sort</a>
+            <a onClick={() => setSelection('Quick Sort')}>Quick Sort</a>
             <a onClick={() => setSelection('Insertion Sort')}>Insertion Sort</a>
+            <a onClick={() => setSelection('Bubble Sort')}>Bubble Sort</a>
           </div>
         </div>
       </div>

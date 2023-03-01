@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './BubbleSortVisualization.css';
 
 let animationSpeed = 1000;
 let arraySize = 200;

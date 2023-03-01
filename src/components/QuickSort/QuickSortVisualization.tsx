@@ -4,50 +4,14 @@ let animationSpeed = 1000;
 let arraySize = 200;
 
 // ============================= Helper Functions =============================
-export function visualizeMergeSort(array) {
+export function visualizeQuickSort(array) {
   const sortingSteps = [];
   if (array.length <= 1) return array;
-  const arrCopy = array.slice();
-  mergeSort(array, 0, array.length - 1, arrCopy, sortingSteps);
+  quickSort(array, sortingSteps);
   return sortingSteps;
 }
 
-function mergeSort(arr, left, right, arrCopy, sortingSteps) {
-  if (left === right) return;
-  const mid = Math.floor((left + right) / 2);
-  mergeSort(arrCopy, left, mid, arr, sortingSteps);
-  mergeSort(arrCopy, mid + 1, right, arr, sortingSteps);
-  mergeTwoSortedIntervals(arr, left, mid, right, arrCopy, sortingSteps);
-}
-
-function mergeTwoSortedIntervals(arr, left, mid, right, arrCopy, sortingSteps) {
-  let k = left;
-  let i = left;
-  let j = mid + 1;
-  while (i <= mid && j <= right) {
-    sortingSteps.push([i, j]);
-    sortingSteps.push([i, j]);
-    if (arrCopy[i] <= arrCopy[j]) {
-      sortingSteps.push([k, arrCopy[i]]);
-      arr[k++] = arrCopy[i++];
-    } else {
-      sortingSteps.push([k, arrCopy[j]]);
-      arr[k++] = arrCopy[j++];
-    }
-  }
-  while (i <= mid) {
-    sortingSteps.push([i, i]);
-    sortingSteps.push([i, i]);
-    sortingSteps.push([k, arrCopy[i]]);
-    arr[k++] = arrCopy[i++];
-  }
-  while (j <= right) {
-    sortingSteps.push([j, j]);
-    sortingSteps.push([j, j]);
-    sortingSteps.push([k, arrCopy[j]]);
-    arr[k++] = arrCopy[j++];
-  }
-}
+function quickSort(arr, sortingSteps) {}
 
 function generateRandomArray() {
   const arr: number[] = [];
@@ -66,7 +30,7 @@ function setArraySize(event) {
 }
 
 // ============================= Merge Sort Visualization Component =============================
-function MergeSortVisualization(): JSX.Element {
+function QuickSortVisualization(): JSX.Element {
   const [isAnimationDone, setIsAnimationDone] = useState(true);
   const [hasANewArrayBeenGenerated, setHasANewArrayBeenGenerated] =
     useState(true);
@@ -74,7 +38,7 @@ function MergeSortVisualization(): JSX.Element {
 
   async function runSortingVisualization() {
     setIsAnimationDone(false);
-    const sortingSteps = visualizeMergeSort([...arrToSort]);
+    const sortingSteps = visualizeQuickSort([...arrToSort]);
     for (let i = 0; i < sortingSteps.length; i++) {
       const bars = document.getElementsByClassName('bar');
       const changedColor = i % 3 !== 2;
@@ -115,7 +79,7 @@ function MergeSortVisualization(): JSX.Element {
         ))}
       </div>
       <div className="controls">
-        <h1>Merge Sort</h1>
+        <h1>Quick Sort</h1>
         <div className="speed-control">
           <h2> Speed  </h2>
           <input
@@ -162,4 +126,4 @@ function MergeSortVisualization(): JSX.Element {
   );
 }
 
-export default MergeSortVisualization;
+export default QuickSortVisualization;
