@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './InsertionSortVisualization.css';
 
 let animationSpeed = 1000;
+let arraySize = 200;
 
 // ============================= Helper Functions =============================
 export function visualizeInsertionSort(array) {
@@ -32,7 +33,7 @@ function insertionSort(arr, sortingSteps) {
 
 function generateRandomArray() {
   const arr: number[] = [];
-  for (let i = 0; i < 200; i++) {
+  for (let i = 0; i < arraySize; i++) {
     arr.push(Math.round(Math.random() * 100));
   }
   return arr;
@@ -40,6 +41,10 @@ function generateRandomArray() {
 
 function setAnimationSpeed(event) {
   animationSpeed = 1000 - event.target.value;
+}
+
+function setArraySize(event) {
+  arraySize = event.target.value;
 }
 
 // ============================= Merge Sort Visualization Component =============================
@@ -102,6 +107,16 @@ function InsertionSortVisualization(): JSX.Element {
             max={1000}
             step={1}
             className="speed-slider"
+          ></input>
+        </div>
+        <div className="array-size-control">
+          <h2> Array Size  </h2>
+          <input
+            type="range"
+            onChange={setArraySize}
+            min={1}
+            max={200}
+            step={1}
           ></input>
         </div>
         <button
