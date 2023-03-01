@@ -113,3 +113,11 @@
   justify-content: space-between;
   align-items: center;
 }
+
+button:disabled {
+  background-color: grey;
+}
+
+button:disabled:hover {
+  background-color: grey;
+}
