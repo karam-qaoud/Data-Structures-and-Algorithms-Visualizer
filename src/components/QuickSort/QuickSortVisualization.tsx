@@ -11,7 +11,52 @@ export function visualizeQuickSort(array) {
   return sortingSteps;
 }
 
-function quickSort(arr, sortingSteps) {}
+function quickSort(arr, sortingSteps) {
+  let stack = [{ left: 0, right: arr.length - 1 }];
+
+  while (stack.length > 0) {
+    let { left, right } = stack.pop();
+
+    if (left >= right) {
+      continue;
+    }
+
+    let pivot = partition(arr, left, right, sortingSteps);
+
+    stack.push({ left: left, right: pivot - 1 });
+    stack.push({ left: pivot + 1, right: right });
+  }
+
+  return arr;
+}
+
+function partition(arr, left, right, sortingSteps) {
+  let pivot = arr[right];
+  let i = left - 1;
+
+  for (let j = left; j < right; j++) {
+    if (arr[j] < pivot) {
+      i++;
+      swap(arr, i, j, sortingSteps);
+    }
+  }
+
+  swap(arr, i + 1, right, sortingSteps);
+
+  return i + 1;
+}
+
+function swap(arr, i, j, sortingSteps) {
+  let temp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = temp;
+  sortingSteps.push([j, j]);
+  sortingSteps.push([j, j]);
+  sortingSteps.push([i, arr[i]]);
+  sortingSteps.push([j, j]);
+  sortingSteps.push([j, j]);
+  sortingSteps.push([j, arr[j]]);
+}
 
 function generateRandomArray() {
   const arr: number[] = [];
