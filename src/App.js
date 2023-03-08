@@ -37,6 +37,8 @@ function App() {
         </div>
       </div>
       <div>{renderSelection(selection)}</div>
+      {/* Break line  */}
+      <div style={{ padding: '20px' }}></div>
       <ExcalidrawEmbed />
     </div>
   );
