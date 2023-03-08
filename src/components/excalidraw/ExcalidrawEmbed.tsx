@@ -424,7 +424,7 @@ export default function ExcalidrawEmbed() {
   };
   return (
     <div className="App" ref={appRef}>
-      <h1> Excalidraw Example</h1>
+      <h1> Excalidraw Sketching Area</h1>
       <div className="excalidraw-wrapper">
         <Excalidraw
           ref={(api: ExcalidrawImperativeAPI) => setExcalidrawAPI(api)}
