@@ -1,8 +1,9 @@
 import './App.css';
-import MergeSortVisualization from './components/MergeSort/MergeSortVisualization.tsx';
-import InsertionSortVisualization from './components/InsertionSort/InsertionSortVisualization.tsx';
-import BubbleSortVisualization from './components/BubbleSort/BubbleSortVisualization.tsx';
-import QuickSortVisualization from './components/QuickSort/QuickSortVisualization.tsx';
+import MergeSortVisualization from './components/sortingAlgorithms/MergeSort/MergeSortVisualization.tsx';
+import InsertionSortVisualization from './components/sortingAlgorithms/InsertionSort/InsertionSortVisualization.tsx';
+import BubbleSortVisualization from './components/sortingAlgorithms/BubbleSort/BubbleSortVisualization.tsx';
+import QuickSortVisualization from './components/sortingAlgorithms/QuickSort/QuickSortVisualization.tsx';
+import ExcalidrawEmbed from './components/excalidraw/ExcalidrawEmbed.tsx';
 import { useState } from 'react';
 function App() {
   let [selection, setSelection] = useState('Merge Sort');
@@ -35,7 +36,10 @@ function App() {
           </div>
         </div>
       </div>
-      {renderSelection(selection)}
+      <div>{renderSelection(selection)}</div>
+      {/* Break line  */}
+      <div style={{ padding: '20px' }}></div>
+      <ExcalidrawEmbed />
     </div>
   );
 }
