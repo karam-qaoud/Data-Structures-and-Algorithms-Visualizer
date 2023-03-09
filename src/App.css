@@ -121,3 +121,23 @@ button:disabled {
 button:disabled:hover {
   background-color: grey;
 }
+
+
+.description {
+  text-align: left;
+  padding: 0px 20px 10px 20px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.sub-title {
+  text-align: left;
+  padding-left: 20px;
+}
+
+.description-section {
+  height: 100vh;
+  width: 100%;
+  margin-top: 10px;
+  padding-top: 10px;
+  background-color:  rgb(62, 142, 65, 0.25);
+}
