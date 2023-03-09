@@ -132,6 +132,7 @@ button:disabled:hover {
 .sub-title {
   text-align: left;
   padding-left: 20px;
+  padding-top: 20px;
 }
 
 .description-section {
