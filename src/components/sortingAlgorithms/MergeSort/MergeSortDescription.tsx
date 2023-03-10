@@ -5,6 +5,7 @@ function MergeSortDescription(): JSX.Element {
     <div className="description-section">
       <h1>About Merge Sort</h1>
       {/* Got from Wikipedia */}
+      {/* Put text in a seperate file and import contnet here */}
       <p className="description">
         In computer science, merge sort (also commonly spelled as mergesort) is
         an efficient, general-purpose, and comparison-based sorting algorithm.
@@ -29,7 +30,7 @@ function MergeSortDescription(): JSX.Element {
         the n steps taken to merge the resulting two lists).[4] The closed form
         follows from the master theorem for divide-and-conquer recurrences.
       </p>
-      <h2 className="sub-title">Runtime Complexity</h2>
+      <h2 className="sub-title">Runtime Complexity <mark>O(N LOG N)</mark></h2>
       <p className="description">
         The runtime of Merge Sort is O(n log n), where n is the number of
         elements to be sorted. Merge Sort is a divide-and-conquer algorithm that
@@ -47,7 +48,7 @@ function MergeSortDescription(): JSX.Element {
         sort or selection sort, which have worse worst-case runtime
         complexities.
       </p>
-      <h2 className="sub-title">Space Complexity</h2>
+      <h2 className="sub-title">Space Complexity <mark>O(N)</mark></h2>
       <p className="description">
         The space complexity of Merge Sort is O(n), where n is the number of
         elements in the array being sorted. In Merge Sort, the input array is
