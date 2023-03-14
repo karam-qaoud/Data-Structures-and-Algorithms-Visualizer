@@ -54,6 +54,9 @@ function BubbleSortVisualization(): JSX.Element {
   const [isAnimationDone, setIsAnimationDone] = useState(true);
   const [hasANewArrayBeenGenerated, setHasANewArrayBeenGenerated] =
     useState(true);
+  const [arraySizeState, setArraySizeState] = useState(arraySize);
+  const [animationSpeedState, setAnimationSpeedState] =
+    useState(animationSpeed);
   const [arrToSort, setArrToSort] = useState(generateRandomArray());
 
   async function runSortingVisualization() {
@@ -104,22 +107,30 @@ function BubbleSortVisualization(): JSX.Element {
           <h2> Speed  </h2>
           <input
             type="range"
-            onChange={setAnimationSpeed}
+            onChange={(event) => {
+              setAnimationSpeed(event);
+              setAnimationSpeedState(animationSpeed);
+            }}
             min={0}
             max={1000}
             step={1}
             className="speed-slider"
           ></input>
+          <p className="label"> {animationSpeedState} ms</p>
         </div>
         <div className="array-size-control">
           <h2> Array Size  </h2>
           <input
             type="range"
-            onChange={setArraySize}
+            onChange={(event) => {
+              setArraySize(event);
+              setArraySizeState(arraySize);
+            }}
             min={1}
             max={200}
             step={1}
           ></input>
+          <p className="label"> {arraySizeState} </p>
         </div>
         <button
           className="btn"
