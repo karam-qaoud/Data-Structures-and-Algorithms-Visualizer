@@ -9,6 +9,7 @@ import ExcalidrawEmbed from './components/excalidraw/ExcalidrawEmbed.tsx';
 import { useState } from 'react';
 import BubbleSortDescription from './components/sortingAlgorithms/BubbleSort/BubbleSortDescription.tsx';
 import InsertionSortDescription from './components/sortingAlgorithms/InsertionSort/InsertionSortDescription.tsx';
+import PathFindingAlgorithm from './components/pathFindingAlgorithm/pathFindingAlgorithm.tsx';
 function App() {
   let [selection, setSelection] = useState('Merge Sort');
 
@@ -19,6 +20,8 @@ function App() {
       return <QuickSortVisualization />;
     } else if (selection === 'Bubble Sort') {
       return <BubbleSortVisualization />;
+    } else if (selection === 'Path Finder') {
+      return <PathFindingAlgorithm />;
     } else {
       return <MergeSortVisualization />;
     }
@@ -51,6 +54,7 @@ function App() {
                 Insertion Sort
               </a>
               <a onClick={() => setSelection('Bubble Sort')}>Bubble Sort</a>
+              <a onClick={() => setSelection('Path Finder')}>Path Finder</a>
             </div>
           </div>
         </div>
