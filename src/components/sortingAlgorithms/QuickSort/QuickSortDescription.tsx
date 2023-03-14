@@ -1,33 +1,30 @@
 import React from 'react';
 import algorithmDescription from './../../../docs/algorithm.json';
-function MergeSortDescription(): JSX.Element {
+function QuickSortDescription(): JSX.Element {
   return (
     <div className="description-section">
-      <h1>About Merge Sort</h1>
-      {/* Got from Wikipedia */}
-      {/* Put text in a seperate file and import contnet here */}
+      <h1>About Quick Sort</h1>
       <p className="description">
-        {algorithmDescription.mergeSort.generalDescription}
+        {algorithmDescription.quickSort.generalDescription}
       </p>
-      {/* Got from Wikipedia */}
       <h2 className="sub-title">Algorithm Analysis</h2>
       <p className="description">
-        {algorithmDescription.mergeSort.algorithmAnalysis}
+        {algorithmDescription.quickSort.algorithmAnalysis}
       </p>
       <h2 className="sub-title">
         Runtime Complexity <mark>O(N LOG N)</mark>
       </h2>
       <p className="description">
-        {algorithmDescription.mergeSort.runtimeComplexity}
+        {algorithmDescription.quickSort.runtimeComplexity}
       </p>
       <h2 className="sub-title">
         Space Complexity <mark>O(N)</mark>
       </h2>
       <p className="description">
-        {algorithmDescription.mergeSort.SpaceComplexity}
+        {algorithmDescription.quickSort.SpaceComplexity}
       </p>
     </div>
   );
 }
 
-export default MergeSortDescription;
+export default QuickSortDescription;

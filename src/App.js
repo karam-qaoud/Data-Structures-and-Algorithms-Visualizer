@@ -1,11 +1,14 @@
 import './App.css';
 import MergeSortVisualization from './components/sortingAlgorithms/MergeSort/MergeSortVisualization.tsx';
 import MergeSortDescription from './components/sortingAlgorithms/MergeSort/MergeSortDescription.tsx';
+import QuickSortDescription from './components/sortingAlgorithms/QuickSort/QuickSortDescription.tsx';
 import InsertionSortVisualization from './components/sortingAlgorithms/InsertionSort/InsertionSortVisualization.tsx';
 import BubbleSortVisualization from './components/sortingAlgorithms/BubbleSort/BubbleSortVisualization.tsx';
 import QuickSortVisualization from './components/sortingAlgorithms/QuickSort/QuickSortVisualization.tsx';
 import ExcalidrawEmbed from './components/excalidraw/ExcalidrawEmbed.tsx';
 import { useState } from 'react';
+import BubbleSortDescription from './components/sortingAlgorithms/BubbleSort/BubbleSortDescription.tsx';
+import InsertionSortDescription from './components/sortingAlgorithms/InsertionSort/InsertionSortDescription.tsx';
 function App() {
   let [selection, setSelection] = useState('Merge Sort');
 
@@ -21,15 +24,15 @@ function App() {
     }
   }
   function renderAlgorithmDescription(selection) {
-    // if (selection === 'Insertion Sort') {
-    // return <InsertionSortDescription />;
-    // } else if (selection === 'Quick Sort') {
-    // return <QuickSortDescription />;
-    // } else if (selection === 'Bubble Sort') {
-    // return <BubbleSortDescription />;
-    // } else {
-    return <MergeSortDescription />;
-    // }
+    if (selection === 'Insertion Sort') {
+      return <InsertionSortDescription />;
+    } else if (selection === 'Quick Sort') {
+      return <QuickSortDescription />;
+    } else if (selection === 'Bubble Sort') {
+      return <BubbleSortDescription />;
+    } else {
+      return <MergeSortDescription />;
+    }
   }
   return (
     <div className="App">
