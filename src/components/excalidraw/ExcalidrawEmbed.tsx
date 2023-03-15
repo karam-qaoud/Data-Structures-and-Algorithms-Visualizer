@@ -429,9 +429,6 @@ export default function ExcalidrawEmbed() {
         <Excalidraw
           ref={(api: ExcalidrawImperativeAPI) => setExcalidrawAPI(api)}
           initialData={initialStatePromiseRef.current.promise}
-          onChange={(elements, state) => {
-            console.info('Elements :', elements, 'State : ', state);
-          }}
           onPointerUpdate={(payload: {
             pointer: { x: number; y: number };
             button: 'down' | 'up';
