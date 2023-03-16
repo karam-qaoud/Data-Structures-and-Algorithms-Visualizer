@@ -73,7 +73,7 @@ function getAllNodes(grid: Grid): Node[] {
   return nodes;
 }
 
-function getNodesInShortestPathOrder(finishNode: Node): Node[] {
+export function getNodesInShortestPathOrder(finishNode: Node): Node[] {
   const nodesInShortestPathOrder: Node[] = [];
   let currentNode: Node | null = finishNode;
   while (currentNode !== null) {
