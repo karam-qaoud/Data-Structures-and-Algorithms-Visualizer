@@ -4,20 +4,18 @@
   color: white;
   outline: 1px solid rgb(175, 216, 248);
   display: inline-block;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .node-finish {
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   background-color: green;
 }
 
 .node-start {
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   background-color: blue;
 }
 
 .node-wall {
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   background-color: black;
 }
 
