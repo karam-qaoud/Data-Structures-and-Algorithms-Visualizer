@@ -44,7 +44,7 @@ const getNewGridWithWallToggled = (grid, row, col) => {
   return newGrid;
 };
 
-function PathFindingAlgorithm(): JSX.Element {
+export function PathFindingAlgorithm(): JSX.Element {
   const [grid, setGrid] = useState([]);
   const [isMouseHeld, setIsMouseHeld] = useState(false);
 
