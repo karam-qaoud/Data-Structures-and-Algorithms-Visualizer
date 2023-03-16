@@ -9,7 +9,7 @@ import ExcalidrawEmbed from './components/excalidraw/ExcalidrawEmbed.tsx';
 import { useState } from 'react';
 import BubbleSortDescription from './components/sortingAlgorithms/BubbleSort/BubbleSortDescription.tsx';
 import InsertionSortDescription from './components/sortingAlgorithms/InsertionSort/InsertionSortDescription.tsx';
-import PathFindingAlgorithm from './components/pathFindingAlgorithm/pathFindingAlgorithm.tsx';
+import PathFindingAlgorithm from './components/pathFindingAlgorithm/PathFindingAlgorithm.tsx';
 function App() {
   let [selection, setSelection] = useState('Merge Sort');
 
