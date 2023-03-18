@@ -60,6 +60,8 @@ export function PathFindingAlgorithm(): JSX.Element {
   const [isVisualizationInProgress, setIsVisualizationInProgress] =
     useState(false);
   const [isGridFresh, setIsGridFresh] = useState(true);
+  const [gridNoyResetAfterVisualization, setGridNoyResetAfterVisualization] =
+    useState(false);
 
   useEffect(() => {
     setGrid(getInitialGrid());
@@ -75,6 +77,7 @@ export function PathFindingAlgorithm(): JSX.Element {
     if (!isMouseHeld) return;
     const newGrid = getNewGridWithWallToggled(grid, row, col);
     setGrid(newGrid);
+    setIsGridFresh(false);
   }
 
   function handleMouseUp() {
@@ -122,6 +125,7 @@ export function PathFindingAlgorithm(): JSX.Element {
     }
     await new Promise((resolve) => {
       setIsVisualizationInProgress(false);
+      setGridNoyResetAfterVisualization(true);
       resolve('done');
     });
   }
@@ -130,6 +134,7 @@ export function PathFindingAlgorithm(): JSX.Element {
     if (isVisualizationInProgress) return;
     setGrid(getInitialGrid());
     setIsGridFresh(true);
+    setGridNoyResetAfterVisualization(false);
   }
   async function visualizeDijkstra() {
     const startNode = grid[START_NODE_ROW][START_NODE_COL];
@@ -168,7 +173,7 @@ export function PathFindingAlgorithm(): JSX.Element {
       <div className="controls">
         <h1>Path Finder</h1>
         <button
-          disabled={isVisualizationInProgress || !isGridFresh}
+          disabled={isVisualizationInProgress || gridNoyResetAfterVisualization}
           className="btn"
           onClick={visualizeDijkstra}
         >
