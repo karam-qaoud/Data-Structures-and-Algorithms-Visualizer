@@ -13,7 +13,17 @@ const getInitialGrid = () => {
   for (let row = 0; row < 20; row++) {
     const currentRow = [];
     for (let col = 0; col < 50; col++) {
-      currentRow.push(createNode(col, row));
+      let node = createNode(col, row);
+      currentRow.push(node);
+      let nodeElement = document.getElementById(`node-${node.row}-${node.col}`);
+      nodeElement?.classList.remove('node-visited');
+      nodeElement?.classList.remove('node-shortest-path');
+      if (row === START_NODE_ROW && col === START_NODE_COL) {
+        nodeElement?.classList.add('node-start');
+      }
+      if (row === FINISH_NODE_ROW && col === FINISH_NODE_COL) {
+        nodeElement?.classList.add('node-finish');
+      }
     }
     grid.push(currentRow);
   }
@@ -47,59 +57,86 @@ const getNewGridWithWallToggled = (grid, row, col) => {
 export function PathFindingAlgorithm(): JSX.Element {
   const [grid, setGrid] = useState([]);
   const [isMouseHeld, setIsMouseHeld] = useState(false);
+  const [isVisualizationInProgress, setIsVisualizationInProgress] =
+    useState(false);
+  const [isGridFresh, setIsGridFresh] = useState(true);
 
   useEffect(() => {
     setGrid(getInitialGrid());
   }, []);
 
-  function handleMouseDown(row, col) {
-    const newGrid = getNewGridWithWallToggled(grid, row, col);
-    setGrid(newGrid);
+  function handleMouseDown() {
+    if (isVisualizationInProgress) return;
     setIsMouseHeld(true);
   }
 
   function handleMouseEnter(row, col) {
-    if (isMouseHeld) return;
+    if (isVisualizationInProgress) return;
+    if (!isMouseHeld) return;
     const newGrid = getNewGridWithWallToggled(grid, row, col);
     setGrid(newGrid);
   }
 
   function handleMouseUp() {
+    if (isVisualizationInProgress) return;
     setIsMouseHeld(false);
   }
 
-  function animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder) {
+  async function animateDijkstra(
+    visitedNodesInOrder,
+    nodesInShortestPathOrder
+  ) {
+    setIsGridFresh(false);
+    setIsVisualizationInProgress(true);
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
-        setTimeout(() => {
-          animateShortestPath(nodesInShortestPathOrder);
-        }, 10 * i);
+        await new Promise((resolve) =>
+          setTimeout(() => {
+            animateShortestPath(nodesInShortestPathOrder);
+            resolve('done');
+          }, 10)
+        );
         return;
       }
-      setTimeout(() => {
-        const node = visitedNodesInOrder[i];
-        document.getElementById(`node-${node.row}-${node.col}`).className =
-          'node node-visited';
-      }, 10 * i);
+      await new Promise((resolve) =>
+        setTimeout(() => {
+          const node = visitedNodesInOrder[i];
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+            'node node-visited';
+          resolve('done');
+        }, 10)
+      );
     }
   }
 
-  function animateShortestPath(nodesInShortestPathOrder) {
+  async function animateShortestPath(nodesInShortestPathOrder) {
     for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
-      setTimeout(() => {
-        const node = nodesInShortestPathOrder[i];
-        document.getElementById(`node-${node.row}-${node.col}`).className =
-          'node node-shortest-path';
-      }, 50 * i);
+      await new Promise((resolve) =>
+        setTimeout(() => {
+          const node = nodesInShortestPathOrder[i];
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+            'node node-shortest-path';
+          resolve('done');
+        }, 50)
+      );
     }
+    await new Promise((resolve) => {
+      setIsVisualizationInProgress(false);
+      resolve('done');
+    });
   }
 
-  function visualizeDijkstra() {
+  function resetGrid() {
+    if (isVisualizationInProgress) return;
+    setGrid(getInitialGrid());
+    setIsGridFresh(true);
+  }
+  async function visualizeDijkstra() {
     const startNode = grid[START_NODE_ROW][START_NODE_COL];
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
     const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-    animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
+    await animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
   }
   return (
     <div className="controls-animation">
@@ -117,9 +154,9 @@ export function PathFindingAlgorithm(): JSX.Element {
                     isStart={isStart}
                     isWall={isWall}
                     isMouseHeld={isMouseHeld}
-                    onMouseDown={(row, col) => handleMouseDown(row, col)}
+                    onMouseDown={handleMouseDown}
                     onMouseEnter={(row, col) => handleMouseEnter(row, col)}
-                    onMouseUp={() => handleMouseUp()}
+                    onMouseUp={handleMouseUp}
                     row={row}
                   />
                 );
@@ -129,9 +166,35 @@ export function PathFindingAlgorithm(): JSX.Element {
         })}
       </div>
       <div className="controls">
-        <button className="btn" onClick={() => visualizeDijkstra()}>
+        <h1>Path Finder</h1>
+        <button
+          disabled={isVisualizationInProgress || !isGridFresh}
+          className="btn"
+          onClick={visualizeDijkstra}
+        >
           Run Visualization
         </button>
+        <button
+          disabled={isVisualizationInProgress}
+          className="btn"
+          onClick={resetGrid}
+        >
+          Reset Grid
+        </button>
+        <div className="map-legend">
+          <div className="map-legend-row">
+            <div className="node-no-pointer-cursor node-start"> S </div>
+            <div> Start Cell </div>
+          </div>
+          <div className="map-legend-row">
+            <div className="node-no-pointer-cursor node-finish"> E </div>
+            <div> End Cell </div>
+          </div>
+          <div className="map-legend-row">
+            <div className="node-no-pointer-cursor node-wall"> W </div>
+            <div> Wall Cell </div>
+          </div>
+        </div>
       </div>
     </div>
   );

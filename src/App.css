@@ -109,8 +109,9 @@
   padding-right: 20px;
 }
 .grid {
+  user-select: none;
   border: thin solid black;
-  height: 500px;
+  height: 440px;
   width: 1000px;
   border-radius: 15px;
   padding-top: 40px;
@@ -165,4 +166,18 @@ button:disabled:hover {
   margin-left: 10px;
   margin-right: 10px;
   color: white;
+}
+
+.map-legend {
+  height: 100px;
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.map-legend-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
 }

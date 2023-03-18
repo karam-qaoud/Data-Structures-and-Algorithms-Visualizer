@@ -6,6 +6,7 @@ export default function Node({
   isStart,
   isFinish,
   isWall,
+  isMouseHeld,
   onMouseDown,
   onMouseEnter,
   onMouseUp,
@@ -15,6 +16,7 @@ export default function Node({
   isStart: boolean;
   isFinish: boolean;
   isWall: boolean;
+  isMouseHeld: boolean;
   onMouseDown: (row: number, col: number) => void;
   onMouseEnter: (row: number, col: number) => void;
   onMouseUp: () => void;
