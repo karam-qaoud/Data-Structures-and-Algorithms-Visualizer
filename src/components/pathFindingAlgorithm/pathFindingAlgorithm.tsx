@@ -47,29 +47,27 @@ const getNewGridWithWallToggled = (grid, row, col) => {
 export function PathFindingAlgorithm(): JSX.Element {
   const [grid, setGrid] = useState([]);
   const [isMouseHeld, setIsMouseHeld] = useState(false);
+  const [isVisualizationInProgress, setIsVisualizationInProgress] =
+    useState(false);
 
   useEffect(() => {
     setGrid(getInitialGrid());
   }, []);
 
-  function handleMouseDown(row, col) {
-    console.log('Mouse is down');
+  function handleMouseDown() {
+    if (isVisualizationInProgress) return;
     setIsMouseHeld(true);
-    document.body.classList.add('no-select');
-    // const newGrid = getNewGridWithWallToggled(grid, row, col);
-    // setGrid(newGrid);
   }
 
   function handleMouseEnter(row, col) {
-    console.log('Mouse is entered');
+    if (isVisualizationInProgress) return;
     if (!isMouseHeld) return;
     const newGrid = getNewGridWithWallToggled(grid, row, col);
     setGrid(newGrid);
   }
 
   function handleMouseUp() {
-    console.log('Mouse is up');
-    document.body.classList.remove('no-select');
+    if (isVisualizationInProgress) return;
     setIsMouseHeld(false);
   }
 
@@ -77,6 +75,7 @@ export function PathFindingAlgorithm(): JSX.Element {
     visitedNodesInOrder,
     nodesInShortestPathOrder
   ) {
+    setIsVisualizationInProgress(true);
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
         await new Promise((resolve) =>
@@ -85,6 +84,10 @@ export function PathFindingAlgorithm(): JSX.Element {
             resolve('done');
           }, 10)
         );
+        await new Promise((resolve) => {
+          setIsVisualizationInProgress(false);
+          resolve('done');
+        });
         return;
       }
       await new Promise((resolve) =>
@@ -108,12 +111,12 @@ export function PathFindingAlgorithm(): JSX.Element {
     }
   }
 
-  function visualizeDijkstra() {
+  async function visualizeDijkstra() {
     const startNode = grid[START_NODE_ROW][START_NODE_COL];
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
     const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-    animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
+    await animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
   }
   return (
     <div className="controls-animation">
@@ -131,9 +134,9 @@ export function PathFindingAlgorithm(): JSX.Element {
                     isStart={isStart}
                     isWall={isWall}
                     isMouseHeld={isMouseHeld}
-                    onMouseDown={(row, col) => handleMouseDown(row, col)}
+                    onMouseDown={handleMouseDown}
                     onMouseEnter={(row, col) => handleMouseEnter(row, col)}
-                    onMouseUp={() => handleMouseUp()}
+                    onMouseUp={handleMouseUp}
                     row={row}
                   />
                 );

@@ -109,6 +109,7 @@
   padding-right: 20px;
 }
 .grid {
+  user-select: none;
   border: thin solid black;
   height: 500px;
   width: 1000px;
@@ -165,10 +166,6 @@ button:disabled:hover {
   margin-left: 10px;
   margin-right: 10px;
   color: white;
-}
-
-body.no-select {
-  user-select: none;
 }
 
 .map-legend {
