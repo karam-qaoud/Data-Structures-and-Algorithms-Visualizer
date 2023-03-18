@@ -166,3 +166,7 @@ button:disabled:hover {
   margin-right: 10px;
   color: white;
 }
+
+body.no-select {
+  user-select: none;
+}

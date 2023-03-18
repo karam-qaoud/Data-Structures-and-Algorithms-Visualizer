@@ -55,6 +55,7 @@ export function PathFindingAlgorithm(): JSX.Element {
   function handleMouseDown(row, col) {
     console.log('Mouse is down');
     setIsMouseHeld(true);
+    document.body.classList.add('no-select');
     // const newGrid = getNewGridWithWallToggled(grid, row, col);
     // setGrid(newGrid);
   }
@@ -68,6 +69,7 @@ export function PathFindingAlgorithm(): JSX.Element {
 
   function handleMouseUp() {
     console.log('Mouse is up');
+    document.body.classList.remove('no-select');
     setIsMouseHeld(false);
   }
 
