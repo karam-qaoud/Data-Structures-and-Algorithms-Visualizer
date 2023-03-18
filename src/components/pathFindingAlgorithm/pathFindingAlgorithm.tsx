@@ -73,19 +73,28 @@ export function PathFindingAlgorithm(): JSX.Element {
     setIsMouseHeld(false);
   }
 
-  function animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder) {
+  async function animateDijkstra(
+    visitedNodesInOrder,
+    nodesInShortestPathOrder
+  ) {
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
-        setTimeout(() => {
-          animateShortestPath(nodesInShortestPathOrder);
-        }, 10 * i);
+        await new Promise((resolve) =>
+          setTimeout(() => {
+            animateShortestPath(nodesInShortestPathOrder);
+            resolve('done');
+          }, 10)
+        );
         return;
       }
-      setTimeout(() => {
-        const node = visitedNodesInOrder[i];
-        document.getElementById(`node-${node.row}-${node.col}`).className =
-          'node node-visited';
-      }, 10 * i);
+      await new Promise((resolve) =>
+        setTimeout(() => {
+          const node = visitedNodesInOrder[i];
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+            'node node-visited';
+          resolve('done');
+        }, 10)
+      );
     }
   }
 
@@ -140,15 +149,15 @@ export function PathFindingAlgorithm(): JSX.Element {
         <div className="map-legend">
           <div className="map-legend-row">
             <div className="node-no-pointer-cursor node-start"> S </div>
-            <div> Start cell </div>
+            <div> Start Cell </div>
           </div>
           <div className="map-legend-row">
             <div className="node-no-pointer-cursor node-finish"> E </div>
-            <div> End cell </div>
+            <div> End Cell </div>
           </div>
           <div className="map-legend-row">
             <div className="node-no-pointer-cursor node-wall"> W </div>
-            <div> Wall cell </div>
+            <div> Wall Cell </div>
           </div>
         </div>
       </div>
