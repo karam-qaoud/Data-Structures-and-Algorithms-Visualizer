@@ -166,6 +166,7 @@ export function PathFindingAlgorithm(): JSX.Element {
         })}
       </div>
       <div className="controls">
+        <h1>Path Finder</h1>
         <button
           disabled={isVisualizationInProgress || !isGridFresh}
           className="btn"
