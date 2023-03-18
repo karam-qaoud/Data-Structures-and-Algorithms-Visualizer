@@ -53,18 +53,21 @@ export function PathFindingAlgorithm(): JSX.Element {
   }, []);
 
   function handleMouseDown(row, col) {
-    const newGrid = getNewGridWithWallToggled(grid, row, col);
-    setGrid(newGrid);
+    console.log('Mouse is down');
     setIsMouseHeld(true);
+    // const newGrid = getNewGridWithWallToggled(grid, row, col);
+    // setGrid(newGrid);
   }
 
   function handleMouseEnter(row, col) {
-    if (isMouseHeld) return;
+    console.log('Mouse is entered');
+    if (!isMouseHeld) return;
     const newGrid = getNewGridWithWallToggled(grid, row, col);
     setGrid(newGrid);
   }
 
   function handleMouseUp() {
+    console.log('Mouse is up');
     setIsMouseHeld(false);
   }
 
