@@ -137,6 +137,20 @@ export function PathFindingAlgorithm(): JSX.Element {
         <button className="btn" onClick={() => visualizeDijkstra()}>
           Run Visualization
         </button>
+        <div className="map-legend">
+          <div className="map-legend-row">
+            <div className="node-no-pointer-cursor node-start"> S </div>
+            <div> Start cell </div>
+          </div>
+          <div className="map-legend-row">
+            <div className="node-no-pointer-cursor node-finish"> E </div>
+            <div> End cell </div>
+          </div>
+          <div className="map-legend-row">
+            <div className="node-no-pointer-cursor node-wall"> W </div>
+            <div> Wall cell </div>
+          </div>
+        </div>
       </div>
     </div>
   );

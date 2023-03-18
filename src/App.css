@@ -170,3 +170,17 @@ button:disabled:hover {
 body.no-select {
   user-select: none;
 }
+
+.map-legend {
+  height: 100px;
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.map-legend-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}

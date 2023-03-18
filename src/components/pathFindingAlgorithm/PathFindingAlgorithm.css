@@ -7,6 +7,14 @@
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   cursor: pointer;
 }
+.node-no-pointer-cursor {
+  width: 20px;
+  height: 20px;
+  color: white;
+  outline: 1px solid rgb(175, 216, 248);
+  display: inline-block;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
 
 .node-finish {
   background-color: green;
