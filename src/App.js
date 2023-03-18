@@ -10,6 +10,7 @@ import { useState } from 'react';
 import BubbleSortDescription from './components/sortingAlgorithms/BubbleSort/BubbleSortDescription.tsx';
 import InsertionSortDescription from './components/sortingAlgorithms/InsertionSort/InsertionSortDescription.tsx';
 import PathFindingAlgorithm from './components/pathFindingAlgorithm/PathFindingAlgorithm.tsx';
+import DijkstrasAlgorithmDescription from './components/pathFindingAlgorithm/DijkstrasAlgorithmDescription.tsx';
 function App() {
   let [selection, setSelection] = useState('Merge Sort');
 
@@ -33,6 +34,8 @@ function App() {
       return <QuickSortDescription />;
     } else if (selection === 'Bubble Sort') {
       return <BubbleSortDescription />;
+    } else if (selection === 'Path Finder') {
+      return <DijkstrasAlgorithmDescription />;
     } else {
       return <MergeSortDescription />;
     }
