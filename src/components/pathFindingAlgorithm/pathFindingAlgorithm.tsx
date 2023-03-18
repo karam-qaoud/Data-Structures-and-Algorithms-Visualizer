@@ -13,7 +13,17 @@ const getInitialGrid = () => {
   for (let row = 0; row < 20; row++) {
     const currentRow = [];
     for (let col = 0; col < 50; col++) {
-      currentRow.push(createNode(col, row));
+      let node = createNode(col, row);
+      currentRow.push(node);
+      let nodeElement = document.getElementById(`node-${node.row}-${node.col}`);
+      nodeElement?.classList.remove('node-visited');
+      nodeElement?.classList.remove('node-shortest-path');
+      if (row === START_NODE_ROW && col === START_NODE_COL) {
+        nodeElement?.classList.add('node-start');
+      }
+      if (row === FINISH_NODE_ROW && col === FINISH_NODE_COL) {
+        nodeElement?.classList.add('node-finish');
+      }
     }
     grid.push(currentRow);
   }
@@ -49,6 +59,7 @@ export function PathFindingAlgorithm(): JSX.Element {
   const [isMouseHeld, setIsMouseHeld] = useState(false);
   const [isVisualizationInProgress, setIsVisualizationInProgress] =
     useState(false);
+  const [isGridFresh, setIsGridFresh] = useState(true);
 
   useEffect(() => {
     setGrid(getInitialGrid());
@@ -75,6 +86,7 @@ export function PathFindingAlgorithm(): JSX.Element {
     visitedNodesInOrder,
     nodesInShortestPathOrder
   ) {
+    setIsGridFresh(false);
     setIsVisualizationInProgress(true);
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
@@ -84,10 +96,6 @@ export function PathFindingAlgorithm(): JSX.Element {
             resolve('done');
           }, 10)
         );
-        await new Promise((resolve) => {
-          setIsVisualizationInProgress(false);
-          resolve('done');
-        });
         return;
       }
       await new Promise((resolve) =>
@@ -101,16 +109,28 @@ export function PathFindingAlgorithm(): JSX.Element {
     }
   }
 
-  function animateShortestPath(nodesInShortestPathOrder) {
+  async function animateShortestPath(nodesInShortestPathOrder) {
     for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
-      setTimeout(() => {
-        const node = nodesInShortestPathOrder[i];
-        document.getElementById(`node-${node.row}-${node.col}`).className =
-          'node node-shortest-path';
-      }, 50 * i);
+      await new Promise((resolve) =>
+        setTimeout(() => {
+          const node = nodesInShortestPathOrder[i];
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+            'node node-shortest-path';
+          resolve('done');
+        }, 50)
+      );
     }
+    await new Promise((resolve) => {
+      setIsVisualizationInProgress(false);
+      resolve('done');
+    });
   }
 
+  function resetGrid() {
+    if (isVisualizationInProgress) return;
+    setGrid(getInitialGrid());
+    setIsGridFresh(true);
+  }
   async function visualizeDijkstra() {
     const startNode = grid[START_NODE_ROW][START_NODE_COL];
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
@@ -146,8 +166,19 @@ export function PathFindingAlgorithm(): JSX.Element {
         })}
       </div>
       <div className="controls">
-        <button className="btn" onClick={() => visualizeDijkstra()}>
+        <button
+          disabled={isVisualizationInProgress || !isGridFresh}
+          className="btn"
+          onClick={visualizeDijkstra}
+        >
           Run Visualization
+        </button>
+        <button
+          disabled={isVisualizationInProgress}
+          className="btn"
+          onClick={resetGrid}
+        >
+          Reset Grid
         </button>
         <div className="map-legend">
           <div className="map-legend-row">
