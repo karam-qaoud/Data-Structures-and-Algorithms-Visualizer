@@ -24,24 +24,26 @@ export default function LoginAndSignup({
           logUser(true);
         });
       })
-      .catch(function (error) {
+      .catch(function () {
         Swal.fire('Incorrect email or password', '', 'error');
       });
   };
   const handleSignUp = (event) => {
     event.preventDefault();
     axios
-      .post('http://localhost:8080/login', {
+      .post('http://localhost:8080/signup', {
         email,
+        first_name: firstName,
+        last_name: lastName,
         password,
       })
-      .then(function (response) {
-        Swal.fire(response.data, '', 'success').then(function () {
+      .then(function () {
+        Swal.fire(`Welcome, ${firstName}`, '', 'success').then(function () {
           logUser(true);
         });
       })
       .catch(function (error) {
-        Swal.fire('Incorrect email or password', '', 'error');
+        Swal.fire(error.response.data, '', 'error');
       });
   };
   return userHasAccount ? (
@@ -108,11 +110,11 @@ export default function LoginAndSignup({
           />
         </label>
         <button className="btn-white-background" type="submit">
-          Log in
+          Sign up
         </button>
         <p>
-          Have an account?{' '}
-          <a onClick={() => setUserHasAccount(true)}>Sign in</a>!
+          Have an account? <a onClick={() => setUserHasAccount(true)}>Log in</a>
+          !
         </p>
       </form>
     </div>

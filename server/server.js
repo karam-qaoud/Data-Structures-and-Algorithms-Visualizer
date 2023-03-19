@@ -11,11 +11,15 @@ app.use(cors());
 app.use(express.json());
 
 app.post('/signup', (req, res) => {
+  const { email, first_name, last_name, password } = req.body;
+  if (!email || !first_name || !last_name || !password) {
+    return res.status(400).send('Please fill out all required fields.');
+  }
   const newUser = new userModel({
-    email: req.body.email,
-    first_name: req.body.first_name,
-    last_name: req.body.last_name,
-    password: req.body.password,
+    email,
+    first_name,
+    last_name,
+    password,
   });
   newUser
     .save()
