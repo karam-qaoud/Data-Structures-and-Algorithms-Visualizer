@@ -35,6 +35,18 @@ app.post('/signup', (req, res) => {
     });
 });
 
+app.post('/login', (req, res) => {
+  const { email, password } = req.body;
+  userModel.findOne({ email, password }, (err, result) => {
+    if (err) throw err;
+    if (result) {
+      res.send(`Welcome, ${result.first_name}!`);
+    } else {
+      res.status(401).send('Invalid email or password.');
+    }
+  });
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
