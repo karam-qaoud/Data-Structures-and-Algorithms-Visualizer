@@ -27,8 +27,8 @@ export default function LoginAndSignup({
   };
   return (
     <div className="login-signup">
-      <form onSubmit={handleSubmit}>
-        <label>
+      <form className='form-wrapper' onSubmit={handleSubmit} >
+        <label className="login-label">
           Email:
           <input
             type="email"
@@ -36,7 +36,7 @@ export default function LoginAndSignup({
             onChange={(event) => setEmail(event.target.value)}
           />
         </label>
-        <label>
+        <label className="login-label">
           Password:
           <input
             type="password"
