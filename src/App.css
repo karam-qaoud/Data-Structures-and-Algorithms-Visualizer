@@ -181,3 +181,9 @@ button:disabled:hover {
   align-items: center;
   justify-content: space-around;
 }
+
+.login-signup {
+  height: 100vh;
+  width: 100vw;
+  background-color: #04aa6d;
+}

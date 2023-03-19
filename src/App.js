@@ -11,8 +11,10 @@ import BubbleSortDescription from './components/sortingAlgorithms/BubbleSort/Bub
 import InsertionSortDescription from './components/sortingAlgorithms/InsertionSort/InsertionSortDescription.tsx';
 import PathFindingAlgorithm from './components/pathFindingAlgorithm/PathFindingAlgorithm.tsx';
 import DijkstrasAlgorithmDescription from './components/pathFindingAlgorithm/DijkstrasAlgorithmDescription.tsx';
+import LoginAndSignup from './components/loginAndSignup/LoginAndSignup.tsx';
 function App() {
   let [selection, setSelection] = useState('Merge Sort');
+  let [isSignedIn, setIsSignedIn] = useState(false);
 
   function renderSelection(selection) {
     if (selection === 'Insertion Sort') {
@@ -40,7 +42,7 @@ function App() {
       return <MergeSortDescription />;
     }
   }
-  return (
+  return isSignedIn ? (
     <div className="App">
       <div className="visualiztion">
         <div className="header">
@@ -69,6 +71,8 @@ function App() {
       <div style={{ padding: '20px' }}></div>
       <ExcalidrawEmbed />
     </div>
+  ) : (
+    <LoginAndSignup logUser={setIsSignedIn}/>
   );
 }
 
