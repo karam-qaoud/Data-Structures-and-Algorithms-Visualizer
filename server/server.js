@@ -11,7 +11,6 @@ app.use(cors());
 app.use(express.json());
 
 app.post('/signup', (req, res) => {
-  
   const newUser = new userModel({
     email: req.body.email,
     first_name: req.body.first_name,
@@ -25,7 +24,14 @@ app.post('/signup', (req, res) => {
       res.send('Signed up a new user!');
     })
     .catch((err) => {
-      res.send('Some error happened, user was not registered!');
+      console.log('Some error happened, user was not registered!');
+      if (err.code === 11000 && err.keyPattern.email) {
+        // If the error is caused by a duplicate email, return an error message
+        res.status(400).send('User with this email already exists!');
+      } else {
+        // If the error is caused by some other reason, return a generic error message
+        res.status(500).send('Some error happened, user was not registered!');
+      }
     });
 });
 
