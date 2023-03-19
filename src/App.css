@@ -191,7 +191,7 @@ button:disabled:hover {
   align-items: center;
 }
 
-.login-label {
+.login-signup-label {
   color: white;
   font-weight: bold;
   font-size: 20px;
@@ -206,6 +206,7 @@ button:disabled:hover {
   align-items: center;
 }
 
+input[type='text'],
 input[type='email'],
 input[type='password'] {
   font-family: Arial, sans-serif;

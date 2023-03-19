@@ -8,9 +8,27 @@ export default function LoginAndSignup({
 }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [userHasAccount, setUserHasAccount] = useState(true);
 
-  const handleSubmit = (event) => {
+  const handleLogIn = (event) => {
+    event.preventDefault();
+    axios
+      .post('http://localhost:8080/login', {
+        email,
+        password,
+      })
+      .then(function (response) {
+        Swal.fire(response.data, '', 'success').then(function () {
+          logUser(true);
+        });
+      })
+      .catch(function (error) {
+        Swal.fire('Incorrect email or password', '', 'error');
+      });
+  };
+  const handleSignUp = (event) => {
     event.preventDefault();
     axios
       .post('http://localhost:8080/login', {
@@ -28,8 +46,8 @@ export default function LoginAndSignup({
   };
   return userHasAccount ? (
     <div className="login-signup">
-      <form className="form-wrapper" onSubmit={handleSubmit}>
-        <label className="login-label">
+      <form className="form-wrapper" onSubmit={handleLogIn}>
+        <label className="login-signup-label">
           Email:
           <input
             type="email"
@@ -37,7 +55,7 @@ export default function LoginAndSignup({
             onChange={(event) => setEmail(event.target.value)}
           />
         </label>
-        <label className="login-label">
+        <label className="login-signup-label">
           Password:
           <input
             type="password"
@@ -50,11 +68,53 @@ export default function LoginAndSignup({
         </button>
         <p>
           Don't have an account?{' '}
-          <a onClick={() => setUserHasAccount(false)}>Sign up!</a>
+          <a onClick={() => setUserHasAccount(false)}>Sign up</a>!
         </p>
       </form>
     </div>
   ) : (
-    <div className="sing-up"></div>
+    <div className="login-signup">
+      <form className="form-wrapper" onSubmit={handleSignUp}>
+        <label className="login-signup-label">
+          First name:
+          <input
+            type="text"
+            value={firstName}
+            onChange={(event) => setFirstName(event.target.value)}
+          />
+        </label>
+        <label className="login-signup-label">
+          Last name:
+          <input
+            type="text"
+            value={lastName}
+            onChange={(event) => setLastName(event.target.value)}
+          />
+        </label>
+        <label className="login-signup-label">
+          Email:
+          <input
+            type="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+          />
+        </label>
+        <label className="login-signup-label">
+          Password:
+          <input
+            type="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
+        </label>
+        <button className="btn-white-background" type="submit">
+          Log in
+        </button>
+        <p>
+          Have an account?{' '}
+          <a onClick={() => setUserHasAccount(true)}>Sign in</a>!
+        </p>
+      </form>
+    </div>
   );
 }
