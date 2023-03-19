@@ -17,8 +17,11 @@ mongoose
   });
 
 let userSchema = new mongoose.Schema({
-  id: Number,
-  email: String,
+  email: {
+    type: String,
+    unique: true,
+    required: true,
+  },
   first_name: String,
   last_name: String,
   password: String,

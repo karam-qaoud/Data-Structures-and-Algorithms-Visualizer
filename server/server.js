@@ -3,7 +3,6 @@ var cors = require('cors');
 
 const database = require('../database/database.js');
 const userModel = database.userModel;
-
 const app = express();
 const port = 8080;
 
