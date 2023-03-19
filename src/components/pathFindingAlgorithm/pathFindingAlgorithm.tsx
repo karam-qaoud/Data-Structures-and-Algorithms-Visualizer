@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './PathFindingAlgorithm.css';
-import Node from './Node';
-import { dijkstra, getNodesInShortestPathOrder } from './dijkstra';
+import Node from './Node.tsx';
+import { dijkstra, getNodesInShortestPathOrder } from './dijkstra.ts';
 
 const START_NODE_ROW = 2;
 const START_NODE_COL = 7;
