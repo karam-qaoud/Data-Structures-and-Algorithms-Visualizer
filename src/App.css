@@ -199,7 +199,7 @@ button:disabled:hover {
 
 .form-wrapper {
   height: 300px;
-  width: 200px;
+  width: 250px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -223,4 +223,26 @@ input[type='email']:focus,
 input[type='password']:focus {
   border: 1px solid #0077be;
   outline: none;
+}
+
+.btn-white-background {
+  background-color: white;
+  color: black;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  margin-left: 5px;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.btn-white-background:hover {
+  cursor: pointer;
+  background-color: #3e8e41;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
 }

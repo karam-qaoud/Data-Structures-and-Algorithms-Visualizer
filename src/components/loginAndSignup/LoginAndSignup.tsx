@@ -8,6 +8,7 @@ export default function LoginAndSignup({
 }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [userHasAccount, setUserHasAccount] = useState(true);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -25,9 +26,9 @@ export default function LoginAndSignup({
         Swal.fire('Incorrect email or password', '', 'error');
       });
   };
-  return (
+  return userHasAccount ? (
     <div className="login-signup">
-      <form className='form-wrapper' onSubmit={handleSubmit} >
+      <form className="form-wrapper" onSubmit={handleSubmit}>
         <label className="login-label">
           Email:
           <input
@@ -44,8 +45,16 @@ export default function LoginAndSignup({
             onChange={(event) => setPassword(event.target.value)}
           />
         </label>
-        <button type="submit">Log in</button>
+        <button className="btn-white-background" type="submit">
+          Log in
+        </button>
+        <p>
+          Don't have an account?{' '}
+          <a onClick={() => setUserHasAccount(false)}>Sign up!</a>
+        </p>
       </form>
     </div>
+  ) : (
+    <div className="sing-up"></div>
   );
 }
