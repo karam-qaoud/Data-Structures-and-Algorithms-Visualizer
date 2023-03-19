@@ -35,12 +35,6 @@ app.post('/signup', (req, res) => {
     });
 });
 
-app.get('/signup', (req, res) => {
-  console.log(req.data);
-
-  res.send('Successful get request!');
-});
-
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
