@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 app.post('/signup', (req, res) => {
-  console.log(req.body);
+  
   const newUser = new userModel({
     email: req.body.email,
     first_name: req.body.first_name,

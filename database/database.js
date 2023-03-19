@@ -17,14 +17,10 @@ mongoose
   });
 
 let userSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    unique: true,
-    required: true,
-  },
-  first_name: String,
-  last_name: String,
-  password: String,
+  email: { type: String, required: true, unique: true },
+  first_name: { type: String, required: true },
+  last_name: { type: String, required: true },
+  password: { type: String, required: true },
 });
 
 let userModel = mongoose.model('users', userSchema);
