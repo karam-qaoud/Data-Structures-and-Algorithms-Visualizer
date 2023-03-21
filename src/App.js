@@ -26,6 +26,8 @@ function App() {
       return <BubbleSortVisualization />;
     } else if (selection === 'Path Finder') {
       return <PathFindingAlgorithm />;
+    } else if (selection === 'Graphs') {
+      return <Graphs />;
     } else {
       return <MergeSortVisualization />;
     }
@@ -39,8 +41,6 @@ function App() {
       return <BubbleSortDescription />;
     } else if (selection === 'Path Finder') {
       return <DijkstrasAlgorithmDescription />;
-    } else if (selection === 'Graphs') {
-      return <Graphs />;
     } else {
       return <MergeSortDescription />;
     }
