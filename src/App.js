@@ -12,6 +12,7 @@ import InsertionSortDescription from './components/sortingAlgorithms/InsertionSo
 import PathFindingAlgorithm from './components/pathFindingAlgorithm/PathFindingAlgorithm.tsx';
 import DijkstrasAlgorithmDescription from './components/pathFindingAlgorithm/DijkstrasAlgorithmDescription.tsx';
 import LoginAndSignup from './components/loginAndSignup/LoginAndSignup.tsx';
+import Graphs from './components/graphs/Graphs.tsx';
 function App() {
   let [selection, setSelection] = useState('Merge Sort');
   let [isSignedIn, setIsSignedIn] = useState(false);
@@ -38,6 +39,8 @@ function App() {
       return <BubbleSortDescription />;
     } else if (selection === 'Path Finder') {
       return <DijkstrasAlgorithmDescription />;
+    } else if (selection === 'Graphs') {
+      return <Graphs />;
     } else {
       return <MergeSortDescription />;
     }
@@ -60,6 +63,7 @@ function App() {
               </a>
               <a onClick={() => setSelection('Bubble Sort')}>Bubble Sort</a>
               <a onClick={() => setSelection('Path Finder')}>Path Finder</a>
+              <a onClick={() => setSelection('Graphs')}>Graphs</a>
             </div>
           </div>
         </div>
@@ -72,7 +76,7 @@ function App() {
       <ExcalidrawEmbed />
     </div>
   ) : (
-    <LoginAndSignup logUser={setIsSignedIn}/>
+    <LoginAndSignup logUser={setIsSignedIn} />
   );
 }
 
