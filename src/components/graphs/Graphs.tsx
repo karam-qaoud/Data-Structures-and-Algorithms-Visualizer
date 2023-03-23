@@ -19,9 +19,14 @@ function Graphs() {
       ctx.beginPath();
       ctx.arc(circle.x1, circle.y1, circle.r1, 0, 2 * Math.PI);
       ctx.stroke();
+      ctx.font = '14px Arial';
+      const label1Width = ctx.measureText(circle.label1).width;
+      ctx.fillText(circle.label1, circle.x1 - label1Width / 2, circle.y1 + 5);
       ctx.beginPath();
       ctx.arc(circle.x2, circle.y2, circle.r2, 0, 2 * Math.PI);
       ctx.stroke();
+      const label2Width = ctx.measureText(circle.label2).width;
+      ctx.fillText(circle.label2, circle.x2 - label2Width / 2, circle.y2 + 5);
     });
 
     // Draw lines between circles
