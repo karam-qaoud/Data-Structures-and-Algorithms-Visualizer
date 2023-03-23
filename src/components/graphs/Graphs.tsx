@@ -5,9 +5,9 @@ function Graphs() {
   const [selectedCircle, setSelectedCircle] = useState(null);
   const [offsetX, setOffsetX] = useState(0);
   const [offsetY, setOffsetY] = useState(0);
-  const [input1, setInput1] = useState('');
-  const [input2, setInput2] = useState('');
-  const [input3, setInput3] = useState('');
+  const [inputOfNode1, setinputOfNode1] = useState('');
+  const [inputOfNode2, setinputOfNode2] = useState('');
+  const [inputOfDeleteNode, setinputOfDeleteNode] = useState('');
   const canvasRef = useRef(null);
   const graph = useRef(new Map());
   useEffect(() => {
@@ -101,16 +101,16 @@ function Graphs() {
     setSelectedCircle(null);
   }
 
-  function handleInput1Change(e) {
-    setInput1(e.target.value);
+  function handleinputOfNode1Change(e) {
+    setinputOfNode1(e.target.value);
   }
 
-  function handleInput2Change(e) {
-    setInput2(e.target.value);
+  function handleinputOfNode2Change(e) {
+    setinputOfNode2(e.target.value);
   }
 
-  function handleInput3Change(e) {
-    setInput3(e.target.value);
+  function handleinputOfDeleteNodeChange(e) {
+    setinputOfDeleteNode(e.target.value);
   }
 
   function addNodeToGraph(node1, node2) {
@@ -124,16 +124,22 @@ function Graphs() {
   }
 
   function handleAddNodes() {
-    let input1Value = input1.trim();
-    let input2Value = input2.trim();
-    if (input1Value === '' && input2Value === '') return;
-    if (input1Value === input2Value) input2Value = '';
-    if (input1Value !== '' || input2Value !== '') {
-      if (input1Value !== '') {
-        addNodeToGraph(input1, input2Value === '' ? null : input2);
+    let inputOfNode1Value = inputOfNode1.trim();
+    let inputOfNode2Value = inputOfNode2.trim();
+    if (inputOfNode1Value === '' && inputOfNode2Value === '') return;
+    if (inputOfNode1Value === inputOfNode2Value) inputOfNode2Value = '';
+    if (inputOfNode1Value !== '' || inputOfNode2Value !== '') {
+      if (inputOfNode1Value !== '') {
+        addNodeToGraph(
+          inputOfNode1,
+          inputOfNode2Value === '' ? null : inputOfNode2
+        );
       }
-      if (input2Value !== '') {
-        addNodeToGraph(input2, input1Value === '' ? null : input1);
+      if (inputOfNode2Value !== '') {
+        addNodeToGraph(
+          inputOfNode2,
+          inputOfNode1Value === '' ? null : inputOfNode1
+        );
       }
       const newCircles = new Map();
       // Copy over old circles
@@ -141,33 +147,33 @@ function Graphs() {
         newCircles.set(key, value);
       }
 
-      if (input1Value !== '' && !newCircles.has(input1)) {
+      if (inputOfNode1Value !== '' && !newCircles.has(inputOfNode1)) {
         // TODO: make Circle factory class
         const circle1 = {
           x: Math.random() * canvasRef.current.width,
           y: Math.random() * canvasRef.current.height,
           r: 20,
         };
-        newCircles.set(input1, circle1);
+        newCircles.set(inputOfNode1, circle1);
       }
 
-      if (input2Value !== '' && !newCircles.has(input2)) {
+      if (inputOfNode2Value !== '' && !newCircles.has(inputOfNode2)) {
         // TODO: make Circle factory class
         const circle2 = {
           x: Math.random() * canvasRef.current.width,
           y: Math.random() * canvasRef.current.height,
           r: 20,
         };
-        newCircles.set(input2, circle2);
+        newCircles.set(inputOfNode2, circle2);
       }
       setCircles(newCircles);
-      setInput1('');
-      setInput2('');
+      setinputOfNode1('');
+      setinputOfNode2('');
     }
   }
 
   function handleDeleteNode() {
-    let nodeValue = input3.trim();
+    let nodeValue = inputOfDeleteNode.trim();
     if (graph.current.has(nodeValue)) {
       graph.current.delete(nodeValue);
       for (let [node, neighbours] of graph.current) {
@@ -189,7 +195,7 @@ function Graphs() {
       }
       setCircles(newCircles);
     }
-    setInput3('');
+    setinputOfDeleteNode('');
   }
 
   return (
@@ -208,25 +214,25 @@ function Graphs() {
       <div className="controls">
         <h1>Graphs</h1>
         <div className="label-and-input">
-          <h3 className="tag" htmlFor="input1">
+          <h3 className="tag" htmlFor="inputOfNode1">
             First Node{' '}
           </h3>
           <input
-            id="input1"
+            id="inputOfNode1"
             type="text"
-            value={input1}
-            onChange={handleInput1Change}
+            value={inputOfNode1}
+            onChange={handleinputOfNode1Change}
           />
         </div>
         <div className="label-and-input">
-          <h3 className="tag" htmlFor="input2">
+          <h3 className="tag" htmlFor="inputOfNode2">
             Second Node
           </h3>
           <input
-            id="input2"
+            id="inputOfNode2"
             type="text"
-            value={input2}
-            onChange={handleInput2Change}
+            value={inputOfNode2}
+            onChange={handleinputOfNode2Change}
           />
         </div>
         <button className="btn" onClick={handleAddNodes}>
@@ -234,14 +240,14 @@ function Graphs() {
         </button>
         <hr style={{ width: '100%', borderTop: '1px solid black' }} />
         <div className="label-and-input">
-          <h3 className="tag" htmlFor="input3">
+          <h3 className="tag" htmlFor="inputOfDeleteNode">
             Node
           </h3>
           <input
-            id="input3"
+            id="inputOfDeleteNode"
             type="text"
-            value={input3}
-            onChange={handleInput3Change}
+            value={inputOfDeleteNode}
+            onChange={handleinputOfDeleteNodeChange}
           />
         </div>
         <button className="btn" onClick={handleDeleteNode}>

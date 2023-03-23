@@ -250,6 +250,7 @@ a {
 
 .label-and-input {
   width: 300px;
+  height: 50px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
