@@ -65,13 +65,13 @@ function Graphs() {
     const mouseX = e.nativeEvent.offsetX;
     const mouseY = e.nativeEvent.offsetY;
 
-    for (let i = 0; i < circles.length; i++) {
-      const dx = circles[i].x1 - mouseX;
-      const dy = circles[i].y1 - mouseY;
+    for (let [circleLabel, circleObject] of circles) {
+      const dx = circleObject.x - mouseX;
+      const dy = circleObject.y - mouseY;
       const distance = Math.sqrt(dx * dx + dy * dy);
 
-      if (distance <= circles[i].r1) {
-        setSelectedCircle(i);
+      if (distance <= circleObject.r) {
+        setSelectedCircle(circleLabel);
         setOffsetX(dx);
         setOffsetY(dy);
         break;
@@ -83,12 +83,19 @@ function Graphs() {
     if (selectedCircle !== null) {
       const mouseX = e.nativeEvent.offsetX;
       const mouseY = e.nativeEvent.offsetY;
-      const newCircles = [...circles];
-      newCircles[selectedCircle] = {
-        ...newCircles[selectedCircle],
-        x1: mouseX + offsetX,
-        y1: mouseY + offsetY,
+      const newCircles = new Map();
+      // Copy over old circles
+      for (let [key, value] of circles) {
+        newCircles.set(key, value);
+      }
+
+      // TODO: make Circle factory class
+      const newSelectedCircleObject = {
+        x: mouseX + offsetX,
+        y: mouseY + offsetY,
+        r: 20,
       };
+      newCircles.set(selectedCircle, newSelectedCircleObject);
       setCircles(newCircles);
     }
   }
