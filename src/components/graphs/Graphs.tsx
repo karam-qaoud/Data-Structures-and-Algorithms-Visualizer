@@ -113,44 +113,50 @@ function Graphs() {
       graph.current.set(node1, []);
     }
 
-    graph.current.get(node1).push(node2);
+    if (node2 !== null) {
+      graph.current.get(node1).push(node2);
+    }
   }
 
   function handleAddNodes() {
-    if (input1.trim() === '' || input2.trim() === '') {
-      return;
-    }
+    if (input1.trim() === '' && input2.trim() === '') return;
 
-    addNodeToGraph(input1, input2);
-    addNodeToGraph(input2, input1);
-    const newCircles = new Map();
-    // Copy over old circles
-    for (let [key, value] of circles) {
-      newCircles.set(key, value);
-    }
+    if (input1.trim() !== '' || input2.trim() !== '') {
+      if (input1.trim() !== '') {
+        addNodeToGraph(input1, input2.trim() === '' ? null : input2);
+      }
+      if (input2.trim() !== '') {
+        addNodeToGraph(input2, input1.trim() === '' ? null : input1);
+      }
+      const newCircles = new Map();
+      // Copy over old circles
+      for (let [key, value] of circles) {
+        newCircles.set(key, value);
+      }
 
-    // TODO: make Circle factory class
-    const circle1 = {
-      x: Math.random() * canvasRef.current.width,
-      y: Math.random() * canvasRef.current.height,
-      r: 20,
-    };
-    const circle2 = {
-      x: Math.random() * canvasRef.current.width,
-      y: Math.random() * canvasRef.current.height,
-      r: 20,
-    };
+      if (input1.trim() !== '' && !newCircles.has(input1)) {
+        // TODO: make Circle factory class
+        const circle1 = {
+          x: Math.random() * canvasRef.current.width,
+          y: Math.random() * canvasRef.current.height,
+          r: 20,
+        };
+        newCircles.set(input1, circle1);
+      }
 
-    if (!newCircles.has(input1)) {
-      newCircles.set(input1, circle1);
+      if (input2.trim() !== '' && !newCircles.has(input2)) {
+        // TODO: make Circle factory class
+        const circle2 = {
+          x: Math.random() * canvasRef.current.width,
+          y: Math.random() * canvasRef.current.height,
+          r: 20,
+        };
+        newCircles.set(input2, circle2);
+      }
+      setCircles(newCircles);
+      setInput1('');
+      setInput2('');
     }
-
-    if (!newCircles.has(input2)) {
-      newCircles.set(input2, circle2);
-    }
-    setCircles(newCircles);
-    setInput1('');
-    setInput2('');
   }
 
   return (
