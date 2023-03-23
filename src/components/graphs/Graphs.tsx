@@ -9,8 +9,6 @@ function Graphs() {
   const [input2, setInput2] = useState('');
   const canvasRef = useRef(null);
   const graph = useRef(new Map());
-  console.log(graph);
-
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
@@ -19,7 +17,6 @@ function Graphs() {
 
     // Draw circles
     circles.forEach((circle, label) => {
-      console.log(label, circle);
       ctx.beginPath();
       ctx.arc(circle.x, circle.y, circle.r, 0, 2 * Math.PI);
       ctx.stroke();
@@ -34,7 +31,6 @@ function Graphs() {
     graph.current.forEach((neighbours, node) => {
       let nodeCircle = circles.get(node);
       neighbours.forEach((neighbour) => {
-        console.log(node, neighbour);
         let neighbourCircle = circles.get(neighbour);
         const x1 = neighbourCircle.x;
         const y1 = neighbourCircle.y;
@@ -127,7 +123,6 @@ function Graphs() {
 
     addNodeToGraph(input1, input2);
     addNodeToGraph(input2, input1);
-    console.log(graph);
     const newCircles = new Map();
     // Copy over old circles
     for (let [key, value] of circles) {
@@ -153,7 +148,6 @@ function Graphs() {
     if (!newCircles.has(input2)) {
       newCircles.set(input2, circle2);
     }
-    console.log(newCircles);
     setCircles(newCircles);
     setInput1('');
     setInput2('');
