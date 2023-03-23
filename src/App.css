@@ -248,3 +248,7 @@ a {
   text-decoration: underline;
   cursor: pointer;
 }
+
+.inputs-for-graph {
+  width: 100px;
+}
