@@ -217,7 +217,6 @@ input[type='password'] {
   border-radius: 4px;
   box-sizing: border-box;
   width: 100%;
-  margin-bottom: 20px;
 }
 
 input[type='text']:focus,
@@ -247,4 +246,16 @@ a {
   color: blue;
   text-decoration: underline;
   cursor: pointer;
+}
+
+.label-and-input {
+  width: 300px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.tag {
+  padding-right: 20px;
 }

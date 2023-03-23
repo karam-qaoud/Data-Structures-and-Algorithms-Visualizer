@@ -204,8 +204,11 @@ function Graphs() {
         />
       </div>
       <div className="controls">
-        <div>
-          <h3 htmlFor="input1">First Node </h3>
+        <h1>Graphs</h1>
+        <div className="label-and-input">
+          <h3 className="tag" htmlFor="input1">
+            First Node{' '}
+          </h3>
           <input
             id="input1"
             type="text"
@@ -213,8 +216,10 @@ function Graphs() {
             onChange={handleInput1Change}
           />
         </div>
-        <div>
-          <h3 htmlFor="input2">Second Node</h3>
+        <div className="label-and-input">
+          <h3 className="tag" htmlFor="input2">
+            Second Node
+          </h3>
           <input
             id="input2"
             type="text"
@@ -225,9 +230,11 @@ function Graphs() {
         <button className="btn" onClick={handleAddNodes}>
           Add Edge
         </button>
-        <hr />
-        <div>
-          <h3 htmlFor="input3">Node</h3>
+        <hr style={{ width: '100%', borderTop: '1px solid black' }} />
+        <div className="label-and-input">
+          <h3 className="tag" htmlFor="input3">
+            Node
+          </h3>
           <input
             id="input3"
             type="text"
