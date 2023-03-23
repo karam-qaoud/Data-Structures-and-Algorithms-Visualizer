@@ -7,6 +7,7 @@ function Graphs() {
   const [offsetY, setOffsetY] = useState(0);
   const [input1, setInput1] = useState('');
   const [input2, setInput2] = useState('');
+  const [input3, setInput3] = useState('');
   const canvasRef = useRef(null);
   const graph = useRef(new Map());
   useEffect(() => {
@@ -108,6 +109,10 @@ function Graphs() {
     setInput2(e.target.value);
   }
 
+  function handleInput3Change(e) {
+    setInput3(e.target.value);
+  }
+
   function addNodeToGraph(node1, node2) {
     if (!graph.current.has(node1)) {
       graph.current.set(node1, []);
@@ -159,6 +164,32 @@ function Graphs() {
     }
   }
 
+  function handleDeleteNode() {
+    let nodeValue = input3.trim();
+    if (graph.current.has(nodeValue)) {
+      graph.current.delete(nodeValue);
+      for (let [node, neighbours] of graph.current) {
+        let newNeighbours = neighbours.reduce((res, curr) => {
+          if (curr !== nodeValue) {
+            res.push(curr);
+          }
+          return res;
+        }, []);
+        console.log(nodeValue, newNeighbours);
+        graph.current.set(node, newNeighbours);
+      }
+      console.log(graph);
+    }
+    if (circles.has(nodeValue)) {
+      let newCircles = new Map();
+      for (let [key, value] of circles) {
+        if (key !== nodeValue) newCircles.set(key, value);
+      }
+      setCircles(newCircles);
+    }
+    setInput3('');
+  }
+
   return (
     <div className="controls-animation">
       <div>
@@ -193,6 +224,19 @@ function Graphs() {
         </div>
         <button className="btn" onClick={handleAddNodes}>
           Add Edge
+        </button>
+        <hr />
+        <div>
+          <h3 htmlFor="input3">Node</h3>
+          <input
+            id="input3"
+            type="text"
+            value={input3}
+            onChange={handleInput3Change}
+          />
+        </div>
+        <button className="btn" onClick={handleDeleteNode}>
+          Delete Node
         </button>
       </div>
     </div>
