@@ -154,11 +154,21 @@ function Graphs() {
   }
 
   return (
-    <div>
-      <div className="inputs-for-graph">
+    <div className="controls-animation">
+      <div>
+        <canvas
+          ref={canvasRef}
+          width={500}
+          height={500}
+          style={{ border: '1px solid black' }}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+        />
+      </div>
+      <div className="controls">
         <div>
-          <button onClick={handleAddNodes}>Add Nodes</button>
-          <label htmlFor="input1">Input 1:</label>
+          <h3 htmlFor="input1">First Node </h3>
           <input
             id="input1"
             type="text"
@@ -167,7 +177,7 @@ function Graphs() {
           />
         </div>
         <div>
-          <label htmlFor="input2">Input 2:</label>
+          <h3 htmlFor="input2">Second Node</h3>
           <input
             id="input2"
             type="text"
@@ -175,16 +185,10 @@ function Graphs() {
             onChange={handleInput2Change}
           />
         </div>
+        <button className="btn" onClick={handleAddNodes}>
+          Add Edge
+        </button>
       </div>
-      <canvas
-        ref={canvasRef}
-        width={500}
-        height={500}
-        style={{ border: '1px solid black' }}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-      />
     </div>
   );
 }
