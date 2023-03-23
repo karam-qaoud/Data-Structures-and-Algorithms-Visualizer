@@ -12,25 +12,44 @@ function Graphs() {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 1;
+
+    // Draw circles
     circles.forEach((circle) => {
       ctx.beginPath();
-      ctx.arc(circle.x, circle.y, circle.r, 0, 2 * Math.PI);
+      ctx.arc(circle.x1, circle.y1, circle.r1, 0, 2 * Math.PI);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(circle.x2, circle.y2, circle.r2, 0, 2 * Math.PI);
       ctx.stroke();
     });
-    for (let i = 0; i < circles.length - 1; i++) {
-      for (let j = i + 1; j < circles.length; j++) {
-        const dx = circles[j].x - circles[i].x;
-        const dy = circles[j].y - circles[i].y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        if (distance <= 200) {
-          ctx.beginPath();
-          ctx.moveTo(circles[i].x, circles[i].y);
-          ctx.lineTo(circles[j].x, circles[j].y);
-          ctx.stroke();
-        }
-      }
-    }
+
+    // Draw lines between circles
+    ctx.beginPath();
+    circles.forEach((circle) => {
+      const x1 = circle.x1;
+      const y1 = circle.y1;
+      const x2 = circle.x2;
+      const y2 = circle.y2;
+      const r1 = circle.r1;
+      const r2 = circle.r2;
+
+      const dx = x2 - x1;
+      const dy = y2 - y1;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      const angle = Math.atan2(dy, dx);
+      const offsetX1 = r1 * Math.cos(angle);
+      const offsetY1 = r1 * Math.sin(angle);
+      const offsetX2 = r2 * Math.cos(angle + Math.PI);
+      const offsetY2 = r2 * Math.sin(angle + Math.PI);
+      const startX = x1 + offsetX1;
+      const startY = y1 + offsetY1;
+      const endX = x2 + offsetX2;
+      const endY = y2 + offsetY2;
+      ctx.moveTo(startX, startY);
+      ctx.lineTo(endX, endY);
+    });
+    ctx.stroke();
   }, [circles]);
 
   function handleMouseDown(e) {
@@ -38,11 +57,11 @@ function Graphs() {
     const mouseY = e.nativeEvent.offsetY;
 
     for (let i = 0; i < circles.length; i++) {
-      const dx = circles[i].x - mouseX;
-      const dy = circles[i].y - mouseY;
+      const dx = circles[i].x1 - mouseX;
+      const dy = circles[i].y1 - mouseY;
       const distance = Math.sqrt(dx * dx + dy * dy);
 
-      if (distance <= circles[i].r) {
+      if (distance <= circles[i].r1) {
         setSelectedCircle(i);
         setOffsetX(dx);
         setOffsetY(dy);
@@ -58,8 +77,8 @@ function Graphs() {
       const newCircles = [...circles];
       newCircles[selectedCircle] = {
         ...newCircles[selectedCircle],
-        x: mouseX + offsetX,
-        y: mouseY + offsetY,
+        x1: mouseX + offsetX,
+        y1: mouseY + offsetY,
       };
       setCircles(newCircles);
     }
@@ -84,16 +103,14 @@ function Graphs() {
     const newCircles = [
       ...circles,
       {
-        x: Math.random() * canvasRef.current.width,
-        y: Math.random() * canvasRef.current.height,
-        r: 20,
-        label: input1,
-      },
-      {
-        x: Math.random() * canvasRef.current.width,
-        y: Math.random() * canvasRef.current.height,
-        r: 20,
-        label: input2,
+        x1: Math.random() * canvasRef.current.width,
+        y1: Math.random() * canvasRef.current.height,
+        r1: 20,
+        label1: input1,
+        x2: Math.random() * canvasRef.current.width,
+        y2: Math.random() * canvasRef.current.height,
+        r2: 20,
+        label2: input2,
       },
     ];
     setCircles(newCircles);
