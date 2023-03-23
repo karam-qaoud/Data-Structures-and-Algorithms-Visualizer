@@ -18,8 +18,6 @@ function Graphs() {
     ctx.lineWidth = 1;
 
     // Draw circles
-    console.log('Drawing circles');
-    console.log(circles);
     circles.forEach((circle, label) => {
       console.log(label, circle);
       ctx.beginPath();
@@ -34,13 +32,16 @@ function Graphs() {
     ctx.beginPath();
 
     graph.current.forEach((neighbours, node) => {
+      let nodeCircle = circles.get(node);
       neighbours.forEach((neighbour) => {
-        const x1 = neighbour.x;
-        const y1 = neighbour.y;
-        const x2 = node.x;
-        const y2 = node.y;
-        const r1 = neighbour.r;
-        const r2 = node.r;
+        console.log(node, neighbour);
+        let neighbourCircle = circles.get(neighbour);
+        const x1 = neighbourCircle.x;
+        const y1 = neighbourCircle.y;
+        const x2 = nodeCircle.x;
+        const y2 = nodeCircle.y;
+        const r1 = neighbourCircle.r;
+        const r2 = nodeCircle.r;
 
         const dx = x2 - x1;
         const dy = y2 - y1;
