@@ -124,14 +124,16 @@ function Graphs() {
   }
 
   function handleAddNodes() {
-    if (input1.trim() === '' && input2.trim() === '') return;
-
-    if (input1.trim() !== '' || input2.trim() !== '') {
-      if (input1.trim() !== '') {
-        addNodeToGraph(input1, input2.trim() === '' ? null : input2);
+    let input1Value = input1.trim();
+    let input2Value = input2.trim();
+    if (input1Value === '' && input2Value === '') return;
+    if (input1Value === input2Value) input2Value = '';
+    if (input1Value !== '' || input2Value !== '') {
+      if (input1Value !== '') {
+        addNodeToGraph(input1, input2Value === '' ? null : input2);
       }
-      if (input2.trim() !== '') {
-        addNodeToGraph(input2, input1.trim() === '' ? null : input1);
+      if (input2Value !== '') {
+        addNodeToGraph(input2, input1Value === '' ? null : input1);
       }
       const newCircles = new Map();
       // Copy over old circles
@@ -139,7 +141,7 @@ function Graphs() {
         newCircles.set(key, value);
       }
 
-      if (input1.trim() !== '' && !newCircles.has(input1)) {
+      if (input1Value !== '' && !newCircles.has(input1)) {
         // TODO: make Circle factory class
         const circle1 = {
           x: Math.random() * canvasRef.current.width,
@@ -149,7 +151,7 @@ function Graphs() {
         newCircles.set(input1, circle1);
       }
 
-      if (input2.trim() !== '' && !newCircles.has(input2)) {
+      if (input2Value !== '' && !newCircles.has(input2)) {
         // TODO: make Circle factory class
         const circle2 = {
           x: Math.random() * canvasRef.current.width,
