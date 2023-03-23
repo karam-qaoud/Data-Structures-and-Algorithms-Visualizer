@@ -41,6 +41,9 @@ function App() {
       return <BubbleSortDescription />;
     } else if (selection === 'Path Finder') {
       return <DijkstrasAlgorithmDescription />;
+    } else if (selection === 'Graphs') {
+      // No description for graphs
+      return <div></div>;
     } else {
       return <MergeSortDescription />;
     }
@@ -56,14 +59,14 @@ function App() {
               <button class="dropbtn">{selection}</button>
             </div>
             <div class="dropdown-content">
+              <a onClick={() => setSelection('Path Finder')}>Path Finder</a>
+              <a onClick={() => setSelection('Graphs')}>Graphs</a>
               <a onClick={() => setSelection('Merge Sort')}>Merge Sort</a>
               <a onClick={() => setSelection('Quick Sort')}>Quick Sort</a>
               <a onClick={() => setSelection('Insertion Sort')}>
                 Insertion Sort
               </a>
               <a onClick={() => setSelection('Bubble Sort')}>Bubble Sort</a>
-              <a onClick={() => setSelection('Path Finder')}>Path Finder</a>
-              <a onClick={() => setSelection('Graphs')}>Graphs</a>
             </div>
           </div>
         </div>
