@@ -19,6 +19,7 @@ app.post('/signup', (req, res) => {
     email,
     first_name,
     last_name,
+    // TODO: hash the passwords before storing them
     password,
   });
   newUser
