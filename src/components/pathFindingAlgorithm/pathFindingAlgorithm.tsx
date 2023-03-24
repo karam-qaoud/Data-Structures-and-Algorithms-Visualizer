@@ -177,7 +177,7 @@ export function PathFindingAlgorithm(): JSX.Element {
           className="btn"
           onClick={visualizeDijkstra}
         >
-          Run Visualization
+          Run Dijkstra's
         </button>
         <button
           disabled={isVisualizationInProgress || isGridFresh}
