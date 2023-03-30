@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+
+const bcrypt = require('bcryptjs');
+const SALT_ROUNDS = 10;
+
 export default function LoginAndSignup({
   logUser,
 }: {
@@ -30,21 +34,36 @@ export default function LoginAndSignup({
   };
   const handleSignUp = (event) => {
     event.preventDefault();
-    axios
-      .post('http://localhost:8080/signup', {
-        email,
-        first_name: firstName,
-        last_name: lastName,
-        password,
-      })
-      .then(function () {
-        Swal.fire(`Welcome, ${firstName}`, '', 'success').then(function () {
-          logUser(true);
+    bcrypt.genSalt(SALT_ROUNDS, function (saltError, salt) {
+      if (saltError) {
+        throw saltError;
+      } else {
+        bcrypt.hash(password, salt, function (hashError, hashedPassword) {
+          if (hashError) {
+            throw hashError;
+          } else {
+            axios
+              .post('http://localhost:8080/signup', {
+                email,
+                first_name: firstName,
+                last_name: lastName,
+                password: hashedPassword,
+              })
+              .then(function () {
+                Swal.fire(`Welcome, ${firstName}`, '', 'success').then(
+                  function () {
+                    logUser(true);
+                  }
+                );
+              })
+              .catch(function (error) {
+                Swal.fire(error.response.data, '', 'error');
+              });
+          }
         });
-      })
-      .catch(function (error) {
-        Swal.fire(error.response.data, '', 'error');
-      });
+      }
+    });
+    console.log(hashedPassword);
   };
   return userHasAccount ? (
     <div className="login-signup">
