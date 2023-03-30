@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Circle } from './Circle.tsx';
 
 function Graphs() {
   const [circles, setCircles] = useState(new Map());
@@ -86,12 +87,11 @@ function Graphs() {
         newCircles.set(key, value);
       }
 
-      // TODO: make Circle factory class
-      const newSelectedCircleObject = {
-        x: mouseX + offsetX,
-        y: mouseY + offsetY,
-        r: 20,
-      };
+      const newSelectedCircleObject = new Circle(
+        mouseX + offsetX,
+        mouseY + offsetY,
+        20
+      );
       newCircles.set(selectedCircle, newSelectedCircleObject);
       setCircles(newCircles);
     }
@@ -148,22 +148,20 @@ function Graphs() {
       }
 
       if (inputOfNode1Value !== '' && !newCircles.has(inputOfNode1)) {
-        // TODO: make Circle factory class
-        const circle1 = {
-          x: Math.random() * canvasRef.current.width,
-          y: Math.random() * canvasRef.current.height,
-          r: 20,
-        };
+        const circle1 = new Circle(
+          Math.random() * canvasRef.current.width,
+          Math.random() * canvasRef.current.height,
+          20
+        );
         newCircles.set(inputOfNode1, circle1);
       }
 
       if (inputOfNode2Value !== '' && !newCircles.has(inputOfNode2)) {
-        // TODO: make Circle factory class
-        const circle2 = {
-          x: Math.random() * canvasRef.current.width,
-          y: Math.random() * canvasRef.current.height,
-          r: 20,
-        };
+        const circle2 = new Circle(
+          Math.random() * canvasRef.current.width,
+          Math.random() * canvasRef.current.height,
+          20
+        );
         newCircles.set(inputOfNode2, circle2);
       }
       setCircles(newCircles);
