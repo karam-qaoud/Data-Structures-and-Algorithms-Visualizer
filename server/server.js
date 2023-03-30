@@ -6,6 +6,8 @@ const userModel = database.userModel;
 const app = express();
 const port = 8080;
 
+const bcrypt = require('bcryptjs');
+
 // parse application/x-www-form-urlencoded
 app.use(cors());
 app.use(express.json());
@@ -19,7 +21,6 @@ app.post('/signup', (req, res) => {
     email,
     first_name,
     last_name,
-    // TODO: hash the passwords before storing them
     password,
   });
   newUser
@@ -42,13 +43,15 @@ app.post('/signup', (req, res) => {
 
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
-  userModel.findOne({ email, password }, (err, result) => {
+  userModel.findOne({ email }, (err, result) => {
     if (err) throw err;
-    if (result) {
-      res.send(`Welcome, ${result.first_name}!`);
-    } else {
-      res.status(401).send('Invalid email or password.');
-    }
+    bcrypt.compare(password, result.password, function (err, output) {
+      if (output === true) {
+        res.send(`Welcome, ${result.first_name}!`);
+      } else {
+        res.status(401).send('Invalid email or password.');
+      }
+    });
   });
 });
 
