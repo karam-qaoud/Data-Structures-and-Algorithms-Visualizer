@@ -18,7 +18,7 @@ function DijkstrasAlgorithmDescription(): JSX.Element {
         {algorithmDescription.dijkstrasAlgorithm.runtimeComplexity}
       </p>
       <h2 className="sub-title">
-        Space Complexity <mark>O(V)</mark>
+        Space Complexity <mark>O(V + E)</mark>
       </h2>
       <p className="description">
         {algorithmDescription.dijkstrasAlgorithm.SpaceComplexity}
