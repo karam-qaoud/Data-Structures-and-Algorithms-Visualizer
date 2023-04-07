@@ -63,7 +63,6 @@ export default function LoginAndSignup({
         });
       }
     });
-    console.log(hashedPassword);
   };
   return userHasAccount ? (
     <div className="login-signup">

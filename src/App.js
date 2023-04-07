@@ -52,7 +52,7 @@ function App() {
     <div className="App">
       <div className="visualiztion">
         <div className="header">
-          <h1>Data Strucutres and Algorithms Visualizer</h1>
+          <h1>Data Structures and Algorithms Visualizer</h1>
           <div class="dropdown">
             <div>
               <label> Select an algorithm: </label>
