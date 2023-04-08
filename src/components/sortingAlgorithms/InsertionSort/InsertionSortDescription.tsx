@@ -12,7 +12,7 @@ function InsertionSortDescription(): JSX.Element {
         {algorithmDescription.insertionSort.algorithmAnalysis}
       </p>
       <h2 className="sub-title">
-        Runtime Complexity <mark>O(N ^ 2)</mark>
+        Runtime Complexity <mark>O(N ^ 2) average and worst case</mark>
       </h2>
       <p className="description">
         {algorithmDescription.insertionSort.runtimeComplexity}

@@ -12,13 +12,13 @@ function QuickSortDescription(): JSX.Element {
         {algorithmDescription.quickSort.algorithmAnalysis}
       </p>
       <h2 className="sub-title">
-        Runtime Complexity <mark>O(N LOG N)</mark>
+        Runtime Complexity <mark>O(N LOG(N)) average, O(N^2) worst case.</mark>
       </h2>
       <p className="description">
         {algorithmDescription.quickSort.runtimeComplexity}
       </p>
       <h2 className="sub-title">
-        Space Complexity <mark>O(N)</mark>
+        Space Complexity <mark>O(LOG (N))</mark>
       </h2>
       <p className="description">
         {algorithmDescription.quickSort.SpaceComplexity}

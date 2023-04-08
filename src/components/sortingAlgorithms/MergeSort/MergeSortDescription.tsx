@@ -15,13 +15,13 @@ function MergeSortDescription(): JSX.Element {
         {algorithmDescription.mergeSort.algorithmAnalysis}
       </p>
       <h2 className="sub-title">
-        Runtime Complexity <mark>O(N LOG N)</mark>
+        Runtime Complexity <mark>O(N LOG N) average and worst case</mark>
       </h2>
       <p className="description">
         {algorithmDescription.mergeSort.runtimeComplexity}
       </p>
       <h2 className="sub-title">
-        Space Complexity <mark>O(N)</mark>
+        Space Complexity <mark>Depends</mark>
       </h2>
       <p className="description">
         {algorithmDescription.mergeSort.SpaceComplexity}
