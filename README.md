@@ -2,7 +2,7 @@
 
 ## How To Start The Project
 
-To start the project open a terminal in the home directory of the project and run (npm run server) which will kick off the server. Then open another terminal and enter the following command (npm run start). This will start the client side of the project and you are ready to go.
+To start the project open a terminal in the home directory of the project and run `npm run server` which will start the backend. Then open another terminal and run `npm run start`. This will start the client side of the project and you will be ready to go.
 
 ## Overview
 
